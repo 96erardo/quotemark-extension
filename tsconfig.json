@@ -4,7 +4,8 @@
     "outDir": "dist"
   },
   "files": [
-    "src/background.ts"
+    "src/background.ts",
+    "src/options/index.ts",
   ],
   "exclude": ["node_modules"]
 }
