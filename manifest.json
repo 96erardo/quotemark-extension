@@ -1,0 +1,11 @@
+{
+    "name": "QuoteMark",
+    "description": "Highlight content and save it for your.",
+    "version": "0.1",
+    "manifest_version": 3,
+    "action": {},
+    "background": {
+        "service_worker": "dist/background.js"
+    },
+    "options_page": "dist/options.html"
+}

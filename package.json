@@ -1,0 +1,24 @@
+{
+  "name": "quotemark-extension",
+  "version": "0.0.1",
+  "description": "Highlight content and save it for you",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc && cp ./src/options.html ./dist",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "chrome",
+    "extension",
+    "quote",
+    "store",
+    "stories"
+  ],
+  "author": "Gerardo García L <gerardoagl96@hotmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "@tsconfig/recommended": "^1.0.1",
+    "@types/chrome": "0.0.159",
+    "typescript": "^4.4.4"
+  }
+}
