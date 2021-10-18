@@ -31,5 +31,64 @@ chrome.runtime.onInstalled.addListener(() => {
 })
 
 chrome.contextMenus.onClicked.addListener((info, tab) => {
-  
+  chrome.identity.getAuthToken({ interactive: false }, async (token) => {
+    if (chrome.runtime.lastError && !token) {
+      return;
+    }
+
+    fetch('http://localhost:3000/graphql', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}` 
+      },
+      body: JSON.stringify({
+        query: `
+          mutation QuoteCreate ($data: QuoteCreateInput!) {
+            quoteCreate (data: $data) {
+              id
+            }
+          }
+        `,
+        variables: {
+          data: {
+            name: tab?.title,
+            content: info.selectionText,
+            link: info.pageUrl,
+          }
+        }
+      })
+    })
+    .then(res => {
+      if (!res.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      return res.json();
+    })
+    .then(() => {
+      chrome.notifications.create('quote-store-success', {
+        priority: 2,
+        type: 'basic',
+        title: 'Quote stored successfully',
+        iconUrl: '../success.png',
+        message: `"${tab?.title}" stored successfully`
+      })
+
+    })
+    .catch(() => {
+      chrome.notifications.create('quote-store-error', {
+        priority: 2,
+        type: 'basic',
+        title: "Quote couldn't be stored",
+        iconUrl: '../error.png',
+        message: `Something happened while storing a quote from "${tab?.title}", please try again.`,
+        // buttons: [
+        //   {
+        //     title: 'Retry'
+        //   }
+        // ]
+      })
+    })
+  })
 })
