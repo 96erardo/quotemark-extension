@@ -4,7 +4,7 @@ module.exports = {
   mode: 'development',
   target: 'web',
   entry: {
-    options: './src/options/index.tsx',
+    options: './src/modules/options/index.tsx',
   },
   output: {
     filename: '[name].js',
@@ -17,7 +17,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /.tsx?$/,
+        test: /\.tsx?$/,
         exclude: /node_modules/,
         use: [
           {
@@ -43,10 +43,16 @@ module.exports = {
               ]
             }
           },
-          {
-            loader: 'ts-loader',
-          }
+          'ts-loader',
         ]
+      },
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader']
+      },
+      {
+        test: /\.(ttf|png)$/i,
+        type: 'asset/resource'
       }
     ]
   }

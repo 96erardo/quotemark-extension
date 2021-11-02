@@ -2,11 +2,13 @@
   "extends": "@tsconfig/recommended/tsconfig.json",
   "compilerOptions": {
     "outDir": "dist",
+    "module": "es6",
+    "moduleResolution": "node",
     "jsx": "preserve",
   },
+  "include": ["global.d.ts"],
   "files": [
     "./src/background.ts",
-    // "./src/options/index.ts",
   ],
   "exclude": ["node_modules"]
 }
