@@ -1,22 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { ThemeProvider } from '@mui/material/styles';
 import { Onboarding } from '../../shared/components/Onboarding';
 import CssBaseline from '@mui/material/CssBaseline';
 import theme from '../../shared/config/theme';
+import { UserContext } from '../user/user-context';
+import { FetchUserQuery } from '../../shared/graphql-types';
 import Box from '@mui/material/Box';
+import { client } from '../../shared/config/apollo';
+import { ApolloProvider } from '@apollo/client';
 
 function Options () {
-  // window.onload = () => {
-  //   const button = document.querySelector('button');
-  
-  //   button?.addEventListener('click', () => {
-  //     // .getAuthToken({ interactive: true }, token => console.log('token', token));
-  //   })
-  // }
+  const [user, setUser] = useState<FetchUserQuery['user'] | null>(null);
 
   return (
-    <ThemeProvider theme={theme}>
+    <UserContext.Provider value={{ user, setUser }}>
       <Box 
         width="100vw" 
         height="100vh"
@@ -24,15 +22,16 @@ function Options () {
       >
         <Onboarding />
       </Box>
-      <CssBaseline />
-    </ThemeProvider>
-    // <div>
-    //   <h1>Options Page</h1>
-    //   <button>
-    //     Log in
-    //   </button>
-    // </div>
+    </UserContext.Provider>
   );
 }
 
-ReactDOM.render(<Options />, document.getElementById('root'));
+ReactDOM.render(
+  <ApolloProvider client={client}>
+    <ThemeProvider theme={theme}>
+      <Options />
+      <CssBaseline />
+    </ThemeProvider>
+  </ApolloProvider>
+  , document.getElementById('root')
+);

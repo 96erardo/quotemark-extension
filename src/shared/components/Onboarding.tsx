@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState, useContext } from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
@@ -7,26 +7,44 @@ import Box from '@mui/material/Box';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { GoogleIcon } from './icons';
 import welcome from '../assets/images/welcome.png';
+import { fetchUser } from '../../modules/user/user-actions';
+import { UserContext } from '../../modules/user/user-context';
 
 export function Onboarding  () {
   const [open, setOpen] = useState(true);
   const [loading, setLoading] = useState(true);
   const [signIn, setSignIn] = useState(false);
-  const [user, setUser] = useState(null);
+  const { setUser } = useContext(UserContext);
 
   useEffect(() => {
-    chrome.identity.getAuthToken({ interactive: false }, (token) => {
-      if (chrome.runtime.lastError && !token) {
+    chrome.identity.clearAllCachedAuthTokens(async () => {
+      const [user, err] = await fetchUser();
+
+      if (err) {
         setLoading(false);
+      
       } else {
-        setLoading(false);
+        setUser(user);
+        setOpen(false);
       }
     })
-  }, []);
+  }, [setUser]);
 
   const onSignIn = useCallback(() => {
     setSignIn(true);
-  }, []);
+
+    chrome.identity.getAuthToken({ interactive: true }, async (token) => {
+      if (chrome.runtime.lastError && !token) {
+        setSignIn(false);
+      
+      } else {
+        const [user] = await fetchUser();
+
+        setUser(user);
+        setOpen(false);
+      }
+    })
+  }, [setUser]);
 
   if (loading) {
     return (
