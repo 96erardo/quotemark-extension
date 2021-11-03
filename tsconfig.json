@@ -5,10 +5,11 @@
     "module": "es6",
     "moduleResolution": "node",
     "jsx": "preserve",
+    "baseUrl": ".",
+    "paths": {
+      "@modules/*": ["src/modules/*"],
+      "@shared/*": ["src/shared/*"],
+    }
   },
-  "include": ["global.d.ts"],
-  "files": [
-    "./src/background.ts",
-  ],
   "exclude": ["node_modules"]
 }

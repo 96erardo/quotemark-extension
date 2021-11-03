@@ -4,7 +4,9 @@
   "description": "Highlight content and save it for you",
   "main": "index.js",
   "scripts": {
-    "build": "tsc && cp ./src/modules/options/index.html ./dist/options.html && webpack",
+    "copy-files": "cp ./src/modules/options/index.html ./dist/options.html",
+    "build-bg": "tsc --project tsconfig.chrome.json",
+    "build": "npm run build-bg && npm run copy-files && webpack",
     "generate-types": "graphql-codegen",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

@@ -11,7 +11,11 @@ module.exports = {
     path: path.resolve(__dirname, 'dist/')
   },
   resolve: {
-    extensions: ['.ts', '.tsx', '.js']
+    extensions: ['.ts', '.tsx', '.js'],
+    alias: {
+      '@modules': path.resolve(__dirname, 'src/modules/'),
+      '@shared': path.resolve(__dirname, 'src/shared/'),
+    }
   },
   devtool: 'cheap-module-source-map',
   module: {

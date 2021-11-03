@@ -1,5 +1,5 @@
 import React, { SetStateAction } from 'react';
-import { FetchUserQuery } from '../../shared/graphql-types';
+import { FetchUserQuery } from '@shared/graphql-types';
 import { Dispatch } from 'react';
 
 type State = {

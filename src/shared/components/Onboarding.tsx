@@ -6,9 +6,9 @@ import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { GoogleIcon } from './icons';
-import welcome from '../assets/images/welcome.png';
-import { fetchUser } from '../../modules/user/user-actions';
-import { UserContext } from '../../modules/user/user-context';
+import welcome from '@shared/assets/images/welcome.png';
+import { fetchUser } from '@modules/user/user-actions';
+import { UserContext } from '@modules/user/user-context';
 
 export function Onboarding  () {
   const [open, setOpen] = useState(true);

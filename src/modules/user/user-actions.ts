@@ -1,7 +1,7 @@
 import { FETCH_USER } from './user-queries';
-import { client } from '../../shared/config/apollo';
-import { Result } from '../../shared/types';
-import { FetchUserQuery } from '../../shared/graphql-types';
+import { client } from '@shared/config/apollo';
+import { Result } from '@shared/types';
+import { FetchUserQuery } from '@shared/graphql-types';
 import { ApolloError, ApolloQueryResult } from '@apollo/client';
 
 /**

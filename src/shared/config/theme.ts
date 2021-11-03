@@ -1,18 +1,18 @@
 import { createTheme } from '@mui/material/styles';
-import PoppinsLight from '../assets/fonts/Poppins-Light.ttf';
-import PoppinsLightItalic from '../assets/fonts/Poppins-LightItalic.ttf';
-import PoppinsRegular from '../assets/fonts/Poppins-Regular.ttf';
-import PoppinsItalic from '../assets/fonts/Poppins-Italic.ttf';
-import PoppinsSemiBold from '../assets/fonts/Poppins-SemiBold.ttf'
-import PoppinsSemiBoldItalic from '../assets/fonts/Poppins-SemiBoldItalic.ttf';
-import PoppinsBold from '../assets/fonts/Poppins-Bold.ttf'
-import PoppinsBoldItalic from '../assets/fonts/Poppins-BoldItalic.ttf';
-import BarlowLight from '../assets/fonts/BarlowCondensed-Light.ttf';
-import BarlowLightItalic from '../assets/fonts/BarlowCondensed-LightItalic.ttf';
-import Barlow from '../assets/fonts/BarlowCondensed-Regular.ttf';
-import BarlowItalic from '../assets/fonts/BarlowCondensed-Italic.ttf';
-import BarlowMedium from '../assets/fonts/BarlowCondensed-Medium.ttf';
-import BarlowMediumItalic from '../assets/fonts/BarlowCondensed-MediumItalic.ttf';
+import PoppinsLight from '@shared/assets/fonts/Poppins-Light.ttf';
+import PoppinsLightItalic from '@shared/assets/fonts/Poppins-LightItalic.ttf';
+import PoppinsRegular from '@shared/assets/fonts/Poppins-Regular.ttf';
+import PoppinsItalic from '@shared/assets/fonts/Poppins-Italic.ttf';
+import PoppinsSemiBold from '@shared/assets/fonts/Poppins-SemiBold.ttf'
+import PoppinsSemiBoldItalic from '@shared/assets/fonts/Poppins-SemiBoldItalic.ttf';
+import PoppinsBold from '@shared/assets/fonts/Poppins-Bold.ttf'
+import PoppinsBoldItalic from '@shared/assets/fonts/Poppins-BoldItalic.ttf';
+import BarlowLight from '@shared/assets/fonts/BarlowCondensed-Light.ttf';
+import BarlowLightItalic from '@shared/assets/fonts/BarlowCondensed-LightItalic.ttf';
+import Barlow from '@shared/assets/fonts/BarlowCondensed-Regular.ttf';
+import BarlowItalic from '@shared/assets/fonts/BarlowCondensed-Italic.ttf';
+import BarlowMedium from '@shared/assets/fonts/BarlowCondensed-Medium.ttf';
+import BarlowMediumItalic from '@shared/assets/fonts/BarlowCondensed-MediumItalic.ttf';
 
 const palette = {
   purpleDark: '#6A2871',
