@@ -65,6 +65,8 @@ export default createTheme({
     h4: {
       fontFamily: 'Poppins',
       fontWeight: 600,
+      color: palette.grayDark,
+      letterSpacing: 0,
     },
     h5: {
       fontFamily: 'Poppins',
@@ -73,6 +75,12 @@ export default createTheme({
     h6: {
       fontFamily: 'Poppins',
       fontWeight: 700,
+    },
+    subtitle1: {
+      fontFamily: 'Poppins',
+      fontWeight: 600,
+      color: palette.grayDark,
+      letterSpacing: 0,
     },
     body1: {
       fontFamily: 'Barlow',

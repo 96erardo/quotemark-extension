@@ -9,6 +9,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import { ListItemText } from '@shared/components/List';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import { useTheme } from '@mui/material/styles';
+import { QuotesView } from '@modules/quote/QuotesView';
 import {
   GlassesIcon,
   ConfigIcon,
@@ -34,6 +35,13 @@ export function MainCard () {
 
   const primary = theme.palette.primary.main;
   const grey = theme.palette.grey.A400;
+  let view = null;
+
+  if (screen === 'quote') {
+    view = (
+      <QuotesView />
+    )
+  }
 
   return (
     <Paper elevation={20} sx={{ width: '100%', height: '100%' }}>
@@ -104,7 +112,7 @@ export function MainCard () {
           height="calc(100% - 64px)"
           maxHeight="calc(100% - 64px)"
         >
-
+          {view}
         </Box>
       </Box>
     </Paper>
