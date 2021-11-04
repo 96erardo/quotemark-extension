@@ -43,8 +43,8 @@ export type DateTimePredicate = {
 
 export type DeleteResult = {
   __typename?: 'DeleteResult';
-  message: Maybe<Scalars['String']>;
-  success: Maybe<Scalars['Boolean']>;
+  message?: Maybe<Scalars['String']>;
+  success?: Maybe<Scalars['Boolean']>;
 };
 
 export type IdPredicate = {
@@ -61,17 +61,17 @@ export type IdPredicate = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  quoteCreate: Maybe<Quote>;
-  quoteDelete: Maybe<DeleteResult>;
-  quoteUpdate: Maybe<Quote>;
-  reportCreate: Maybe<Report>;
-  reportUpdate: Maybe<Report>;
-  storyCreate: Maybe<Story>;
-  storyDelete: Maybe<DeleteResult>;
-  userBan: Maybe<User>;
-  userSetRole: Maybe<User>;
-  userUnban: Maybe<User>;
-  userUpdate: Maybe<User>;
+  quoteCreate?: Maybe<Quote>;
+  quoteDelete?: Maybe<DeleteResult>;
+  quoteUpdate?: Maybe<Quote>;
+  reportCreate?: Maybe<Report>;
+  reportUpdate?: Maybe<Report>;
+  storyCreate?: Maybe<Story>;
+  storyDelete?: Maybe<DeleteResult>;
+  userBan?: Maybe<User>;
+  userSetRole?: Maybe<User>;
+  userUnban?: Maybe<User>;
+  userUpdate?: Maybe<User>;
 };
 
 
@@ -135,12 +135,12 @@ export type MutationUserUpdateArgs = {
 
 export type Query = {
   __typename?: 'Query';
-  myStoriesList: Maybe<StoryListResponse>;
-  quotesList: Maybe<QuoteListResponse>;
-  reportsList: Maybe<ReportListResponse>;
-  storiesList: Maybe<UsersStoryListResponse>;
-  user: Maybe<User>;
-  usersList: Maybe<UserListResponse>;
+  myStoriesList?: Maybe<StoryListResponse>;
+  quotesList: QuoteListResponse;
+  reportsList?: Maybe<ReportListResponse>;
+  storiesList?: Maybe<UsersStoryListResponse>;
+  user?: Maybe<User>;
+  usersList?: Maybe<UserListResponse>;
 };
 
 
@@ -179,14 +179,14 @@ export type QueryUsersListArgs = {
 
 export type Quote = {
   __typename?: 'Quote';
-  content: Maybe<Scalars['String']>;
-  createdAt: Maybe<Scalars['DateTime']>;
-  deletedAt: Maybe<Scalars['DateTime']>;
-  id: Maybe<Scalars['ID']>;
-  link: Maybe<Scalars['String']>;
-  name: Maybe<Scalars['String']>;
-  updatedAt: Maybe<Scalars['DateTime']>;
-  user: Maybe<User>;
+  content: Scalars['String'];
+  createdAt: Scalars['DateTime'];
+  deletedAt?: Maybe<Scalars['DateTime']>;
+  id: Scalars['ID'];
+  link: Scalars['String'];
+  name: Scalars['String'];
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  user: User;
 };
 
 export type QuoteCreateInput = {
@@ -213,20 +213,20 @@ export type QuoteKeyFilter = {
 
 export type QuoteListResponse = {
   __typename?: 'QuoteListResponse';
-  count: Maybe<Scalars['Int']>;
-  items: Maybe<Array<Maybe<Quote>>>;
+  count: Scalars['Int'];
+  items: Array<Quote>;
 };
 
 export type Report = {
   __typename?: 'Report';
-  createdAt: Maybe<Scalars['DateTime']>;
-  deletedAt: Maybe<Scalars['DateTime']>;
-  id: Maybe<Scalars['ID']>;
-  reason: Maybe<Scalars['String']>;
-  status: Maybe<ReportStatus>;
-  story: Maybe<Story>;
-  updatedAt: Maybe<Scalars['DateTime']>;
-  user: Maybe<User>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  deletedAt?: Maybe<Scalars['DateTime']>;
+  id?: Maybe<Scalars['ID']>;
+  reason?: Maybe<Scalars['String']>;
+  status?: Maybe<ReportStatus>;
+  story?: Maybe<Story>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  user?: Maybe<User>;
 };
 
 export type ReportCreateInput = {
@@ -246,8 +246,8 @@ export type ReportFilter = {
 
 export type ReportListResponse = {
   __typename?: 'ReportListResponse';
-  count: Maybe<Scalars['Int']>;
-  items: Maybe<Array<Maybe<Report>>>;
+  count: Scalars['Int'];
+  items: Array<Report>;
 };
 
 export enum ReportStatus {
@@ -272,14 +272,14 @@ export enum Status {
 
 export type Story = {
   __typename?: 'Story';
-  color: Maybe<Scalars['String']>;
-  content: Maybe<Scalars['String']>;
-  createdAt: Maybe<Scalars['DateTime']>;
-  deletedAt: Maybe<Scalars['DateTime']>;
-  id: Maybe<Scalars['ID']>;
-  link: Maybe<Scalars['String']>;
-  updatedAt: Maybe<Scalars['DateTime']>;
-  user: Maybe<User>;
+  color?: Maybe<Scalars['String']>;
+  content?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  deletedAt?: Maybe<Scalars['DateTime']>;
+  id?: Maybe<Scalars['ID']>;
+  link?: Maybe<Scalars['String']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  user?: Maybe<User>;
 };
 
 export type StoryFilter = {
@@ -297,8 +297,8 @@ export type StoryKeyFilter = {
 
 export type StoryListResponse = {
   __typename?: 'StoryListResponse';
-  count: Maybe<Scalars['Int']>;
-  items: Maybe<Array<Maybe<Story>>>;
+  count: Scalars['Int'];
+  items: Array<Story>;
 };
 
 export type StoryQuoteRelationInput = {
@@ -319,17 +319,17 @@ export type StringPredicate = {
 
 export type User = {
   __typename?: 'User';
-  avatar: Maybe<Scalars['String']>;
-  createdAt: Maybe<Scalars['DateTime']>;
-  deletedAt: Maybe<Scalars['DateTime']>;
-  email: Maybe<Scalars['String']>;
-  firstName: Maybe<Scalars['String']>;
-  id: Maybe<Scalars['ID']>;
-  lastName: Maybe<Scalars['String']>;
-  role: Maybe<Role>;
-  status: Maybe<Status>;
-  stories: Maybe<UserStoriesCount>;
-  updatedAt: Maybe<Scalars['DateTime']>;
+  avatar?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  deletedAt?: Maybe<Scalars['DateTime']>;
+  email?: Maybe<Scalars['String']>;
+  firstName?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['ID']>;
+  lastName?: Maybe<Scalars['String']>;
+  role?: Maybe<Role>;
+  status?: Maybe<Status>;
+  stories?: Maybe<UserStoriesCount>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
 };
 
 export type UserFilter = {
@@ -347,13 +347,13 @@ export type UserFilter = {
 
 export type UserListResponse = {
   __typename?: 'UserListResponse';
-  count: Maybe<Scalars['Int']>;
-  items: Maybe<Array<Maybe<User>>>;
+  count: Scalars['Int'];
+  items: Array<User>;
 };
 
 export type UserStoriesCount = {
   __typename?: 'UserStoriesCount';
-  count: Maybe<Scalars['Int']>;
+  count?: Maybe<Scalars['Int']>;
 };
 
 export type UserUpdateInput = {
@@ -363,11 +363,20 @@ export type UserUpdateInput = {
 
 export type UsersStoryListResponse = {
   __typename?: 'UsersStoryListResponse';
-  count: Maybe<Scalars['Int']>;
-  items: Maybe<Array<Maybe<User>>>;
+  count?: Maybe<Scalars['Int']>;
+  items?: Maybe<Array<Maybe<User>>>;
 };
 
-export type FetchUserQueryVariables = Exact<{ [key: string]: never; }>;
+export type FetchQuotesVariables = Exact<{
+  filter?: Maybe<QuoteFilter>;
+  first?: Maybe<Scalars['Int']>;
+  skip?: Maybe<Scalars['Int']>;
+}>;
 
 
-export type FetchUserQuery = { __typename?: 'Query', user: { __typename: 'User', id: string | null, firstName: string | null, lastName: string | null, email: string | null, avatar: string | null, role: Role | null, status: Status | null, createdAt: any | null, updatedAt: any | null, deletedAt: any | null } | null };
+export type FetchQuotes = { __typename?: 'Query', quotesList: { __typename: 'QuoteListResponse', count: number, items: Array<{ __typename: 'Quote', id: string, name: string, content: string, link: string, createdAt: any }> } };
+
+export type FetchUserVariables = Exact<{ [key: string]: never; }>;
+
+
+export type FetchUser = { __typename?: 'Query', user?: { __typename: 'User', id?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, email?: string | null | undefined, avatar?: string | null | undefined, role?: Role | null | undefined, status?: Status | null | undefined, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, deletedAt?: any | null | undefined } | null | undefined };

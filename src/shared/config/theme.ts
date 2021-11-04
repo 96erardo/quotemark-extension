@@ -133,6 +133,13 @@ export default createTheme({
         }
       }
     },
+    MuiBackdrop: {
+      styleOverrides: {
+        root: {
+          backdropFilter: 'blur(5px)'
+        }
+      }
+    },
     MuiCssBaseline: {
       styleOverrides: `
         @font-face {

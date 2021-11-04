@@ -1,7 +1,7 @@
 import { FETCH_USER } from './user-queries';
 import { client } from '@shared/config/apollo';
 import { Result } from '@shared/types';
-import { FetchUserQuery } from '@shared/graphql-types';
+import { FetchUser } from '@shared/graphql-types';
 import { ApolloError, ApolloQueryResult } from '@apollo/client';
 
 /**
@@ -11,11 +11,11 @@ import { ApolloError, ApolloQueryResult } from '@apollo/client';
  * 
  * @returns The use object
  */
-export async function fetchUser (): Result<FetchUserQuery['user'], ApolloError> {
-  let response: ApolloQueryResult<FetchUserQuery>;
+export async function fetchUser (): Result<FetchUser['user'], ApolloError> {
+  let response: ApolloQueryResult<FetchUser>;
 
   try {
-    response = await client.query<FetchUserQuery>({
+    response = await client.query<FetchUser>({
       query: FETCH_USER,
       fetchPolicy: 'network-only',
     });

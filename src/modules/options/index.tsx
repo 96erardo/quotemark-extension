@@ -5,7 +5,7 @@ import { Onboarding } from '@shared/components/Onboarding';
 import { MainCard } from '@shared/components/MainCard';
 import CssBaseline from '@mui/material/CssBaseline';
 import { UserContext } from '@modules/user/user-context';
-import { FetchUserQuery } from '@shared/graphql-types';
+import { FetchUser } from '@shared/graphql-types';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import { client } from '@shared/config/apollo';
@@ -13,7 +13,7 @@ import { ApolloProvider } from '@apollo/client';
 import theme from '@shared/config/theme';
 
 function Options () {
-  const [user, setUser] = useState<FetchUserQuery['user'] | null>(null);
+  const [user, setUser] = useState<FetchUser['user'] | null>(null);
 
   return (
     <UserContext.Provider value={{ user, setUser }}>

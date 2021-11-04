@@ -4,9 +4,10 @@ import Checkbox from '@mui/material/Checkbox';
 import { QuoteItemDate } from './QuoteItemDate';
 import { QuoteItemTitle } from './QuoteItemTitle';
 import { QuoteItemContent } from './QuoteItemContent';
+import { FetchQuotes } from '@shared/graphql-types';
 import { useTheme } from '@mui/material/styles';
 
-export const QuoteItem: React.FC = () => {
+export const QuoteItem: React.FC<Props> = ({ quote }) => {
   const [checked, setChecked] = useState(false);
   const [collapsed, setCollapsed] = useState(true);
   const theme = useTheme();
@@ -40,22 +41,26 @@ export const QuoteItem: React.FC = () => {
       </Box>
       <Box flexGrow={1} overflow="hidden" flexDirection="column">
         <QuoteItemTitle
-          date="2021-10-20T02:04:40.000Z"
-          title="Qui aliquip labore elit eiusmod"
-          link="https://google.com"
+          date={quote.createdAt}
+          title={quote.name}
+          link={quote.link}
           collapsed={collapsed}
         />
         <QuoteItemContent 
-          text="Fugiat nisi dolore fugiat labore nostrud sunt esse id. Fugiat sint est ullamco amet incididunt proident cupidatat Lorem adipisicing fugiat incididunt laborum sunt do. Cupidatat ex sint incididunt adipisicing voluptate elit ut ad adipisicing. Dolor et proident dolore proident aliqua exercitation ex amet qui qui proident. Eiusmod elit exercitation qui laborum excepteur."
+          text={quote.content}
           collapsed={collapsed}
           checked={checked}
           onClick={handleClick}
         />
       </Box>
       <QuoteItemDate 
-        date="2021-10-20T02:04:40.000Z" 
+        date={quote.createdAt} 
         collapsed={collapsed} 
       />
     </Box>
   );
+}
+
+type Props = {
+  quote: FetchQuotes['quotesList']['items'][0]
 }
