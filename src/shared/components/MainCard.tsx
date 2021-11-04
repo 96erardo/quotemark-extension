@@ -61,13 +61,13 @@ export function MainCard () {
       </Box>
       <Box
         width="100%"
-        height="100%"
+        height="calc(100% - 64px)"
         display="flex"
         flexDirection="row"
       >
         <Box
           width={220}
-          height="calc(100% - 64px)"
+          height="100%"
           borderRight={1}
           borderColor="grey.200"
         >
@@ -108,7 +108,7 @@ export function MainCard () {
           </List>
         </Box>
         <Box 
-          width="100%" 
+          width="calc(100% - 220px)" 
           height="calc(100% - 64px)"
           maxHeight="calc(100% - 64px)"
         >

@@ -87,8 +87,9 @@ export default createTheme({
       fontWeight: 400,
     },
     body2: {
-      fontFamily: 'Barlow',
-      fontWeight: 300,
+      fontFamily: 'Poppins',
+      fontWeight: 600,
+      fontSize: '0.65rem'
     },
     button: {
       fontFamily: 'Poppins',
@@ -120,6 +121,15 @@ export default createTheme({
           fontFamily: 'Poppins',
           fontWeight: 700,
           color: palette.gray
+        }
+      }
+    },
+    MuiLink: {
+      styleOverrides: {
+        root: {
+          fontFamily: 'Poppins',
+          fontWeight: 600,
+          letterSpacing: 0,
         }
       }
     },
