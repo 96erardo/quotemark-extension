@@ -41,6 +41,12 @@ export default createTheme({
     background: {
       paper: palette.white,
       default: palette.grayLight_1,
+    },
+    grey: {
+      A100: palette.grayLight_1,
+      A200: palette.grayLight_2,
+      A400: palette.gray,
+      A700: palette.grayDark,
     }
   },
   typography: {
@@ -87,6 +93,25 @@ export default createTheme({
       styleOverrides: {
         paper: {
           borderRadius: '15px'
+        }
+      }
+    },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          borderRadius: '15px'
+        },
+        elevation20: {
+          boxShadow: '0px 0px 20px rgb(166 166 166 / 25%)',
+        }
+      }
+    },
+    MuiListItemText: {
+      styleOverrides: {
+        primary: {
+          fontFamily: 'Poppins',
+          fontWeight: 700,
+          color: palette.gray
         }
       }
     },
