@@ -1,15 +1,44 @@
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 const path = require('path');
 
-module.exports = {
-  mode: 'development',
+const template = `
+<!DOCTYPE html> 
+<html lang="en">
+  <head>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
+`
+
+module.exports = (env) => ({
+  mode: env.mode,
   target: 'web',
   entry: {
     options: './src/modules/options/index.tsx',
+    background: './src/background.ts'
   },
   output: {
     filename: '[name].js',
-    path: path.resolve(__dirname, 'dist/')
+    path: path.resolve(__dirname, 'dist/'),
+    clean: true,
   },
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: 'Quotemark',
+      filename: 'options.html',
+      inject: 'body',
+      templateContent: template,   
+      meta: {
+        'viewport': 'initial-scale=1, width=device-width',
+        'charset': 'UTF-8'
+      },
+      chunks: ['options']
+    }),
+    new Dotenv(),
+  ],
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],
     alias: {
@@ -31,7 +60,6 @@ module.exports = {
                 [
                   '@babel/preset-env',
                   {
-                    useBuiltIns: 'entry',
                     targets: {
                       chrome: '88'
                     },
@@ -41,7 +69,7 @@ module.exports = {
                   '@babel/preset-react',
                   { 
                     runtime: 'automatic',
-                    development: true,
+                    development: env.mode === 'development',
                   }
                 ],
               ]
@@ -60,4 +88,4 @@ module.exports = {
       }
     ]
   }
-}
+})

@@ -139,7 +139,7 @@ export type Query = {
   quotesList: QuoteListResponse;
   reportsList?: Maybe<ReportListResponse>;
   storiesList?: Maybe<UsersStoryListResponse>;
-  user?: Maybe<User>;
+  user: User;
   usersList?: Maybe<UserListResponse>;
 };
 
@@ -319,16 +319,16 @@ export type StringPredicate = {
 
 export type User = {
   __typename?: 'User';
-  avatar?: Maybe<Scalars['String']>;
-  createdAt?: Maybe<Scalars['DateTime']>;
+  avatar: Scalars['String'];
+  createdAt: Scalars['DateTime'];
   deletedAt?: Maybe<Scalars['DateTime']>;
-  email?: Maybe<Scalars['String']>;
-  firstName?: Maybe<Scalars['String']>;
-  id?: Maybe<Scalars['ID']>;
-  lastName?: Maybe<Scalars['String']>;
-  role?: Maybe<Role>;
-  status?: Maybe<Status>;
-  stories?: Maybe<UserStoriesCount>;
+  email: Scalars['String'];
+  firstName: Scalars['String'];
+  id: Scalars['ID'];
+  lastName: Scalars['String'];
+  role: Role;
+  status: Status;
+  stories: UserStoriesCount;
   updatedAt?: Maybe<Scalars['DateTime']>;
 };
 
@@ -379,4 +379,4 @@ export type FetchQuotes = { __typename?: 'Query', quotesList: { __typename: 'Quo
 export type FetchUserVariables = Exact<{ [key: string]: never; }>;
 
 
-export type FetchUser = { __typename?: 'Query', user?: { __typename: 'User', id?: string | null | undefined, firstName?: string | null | undefined, lastName?: string | null | undefined, email?: string | null | undefined, avatar?: string | null | undefined, role?: Role | null | undefined, status?: Status | null | undefined, createdAt?: any | null | undefined, updatedAt?: any | null | undefined, deletedAt?: any | null | undefined } | null | undefined };
+export type FetchUser = { __typename?: 'Query', user: { __typename: 'User', id: string, firstName: string, lastName: string, email: string, avatar: string, role: Role, status: Status, createdAt: any, updatedAt?: any | null | undefined, deletedAt?: any | null | undefined } };

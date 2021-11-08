@@ -36,7 +36,7 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
       return;
     }
 
-    fetch('http://localhost:3000/graphql', {
+    fetch(process.env.API_ENDPOINT as string, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

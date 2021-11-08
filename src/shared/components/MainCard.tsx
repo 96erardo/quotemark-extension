@@ -18,7 +18,7 @@ import {
 
 export function MainCard () {
   const user = useUser();
-  const { 0: firstLetter } = user?.firstName?.toUpperCase() || 'A';
+  const { 0: firstLetter } = user?.firstName.toUpperCase() || 'A';
   const [screen, setScreen] = useState<Screen>('quote');
   const theme = useTheme();
 
@@ -109,8 +109,8 @@ export function MainCard () {
         </Box>
         <Box 
           width="calc(100% - 220px)" 
-          height="calc(100% - 64px)"
-          maxHeight="calc(100% - 64px)"
+          height="100%"
+          maxHeight="100%"
         >
           {view}
         </Box>

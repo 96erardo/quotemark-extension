@@ -36,5 +36,9 @@ export async function fetchQuotes (page: number = 1): Result<FetchQuotes['quotes
 
   const { data: { quotesList } } = response;
 
-  return [quotesList, null];
+  return await (new Promise(res => setTimeout(() => {
+    res([quotesList, null])
+  }, 2000)))
+
+  // return [quotesList, null];
 }

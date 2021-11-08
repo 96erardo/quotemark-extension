@@ -7,7 +7,7 @@ import { FetchUser } from '@shared/graphql-types';
  * 
  * @returns The currently authenticated user
  */
-export function useUser (): FetchUser['user'] {
+export function useUser (): FetchUser['user'] | null {
   const { user } = useContext(UserContext);
 
   return user;

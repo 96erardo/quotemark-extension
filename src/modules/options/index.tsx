@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { ThemeProvider } from '@mui/material/styles';
 import { Onboarding } from '@shared/components/Onboarding';
@@ -14,6 +14,10 @@ import theme from '@shared/config/theme';
 
 function Options () {
   const [user, setUser] = useState<FetchUser['user'] | null>(null);
+
+  useEffect(() => {
+    document.title = 'QuoteMark | Options';
+  }, []);
 
   return (
     <UserContext.Provider value={{ user, setUser }}>

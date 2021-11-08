@@ -1,5 +1,5 @@
-import { Dispatch, SetStateAction, useCallback, useEffect, useState } from 'react';
-import { FetchQuotes, Quote } from '@shared/graphql-types';
+import { useCallback, useEffect, useState } from 'react';
+import { FetchQuotes } from '@shared/graphql-types';
 import { fetchQuotes } from '../quote-actions';
 
 const initialState = {
@@ -15,11 +15,25 @@ const initialState = {
  * 
  * @returns The hook state
  */
-export function useQuotes ():HookState {
+export function useQuotes (authenticated: boolean):HookState {
   const [state, setState] = useState<State>(initialState);
   const [page, setPage] = useState(1);
 
   const fetch = useCallback(async () => {
+    if (!authenticated) {
+      return setState(prevState => ({
+        ...prevState,
+        loading: false,
+        error: null,
+      }));
+    }
+
+    setState(prevState => ({
+      ...prevState,
+      loading: true,
+      error: null
+    }));
+
     const [quotesList, err] = await fetchQuotes(page);
 
     if (err) {
@@ -42,7 +56,7 @@ export function useQuotes ():HookState {
         error: null,
       }))
     }
-  }, [page]);
+  }, [authenticated, page]);
 
   const next = useCallback(() => {
     if (state.items.length < state.count) {
@@ -50,14 +64,29 @@ export function useQuotes ():HookState {
     }
   }, [state]);
 
+  const refresh = useCallback(() => {
+    setState(prevState => ({
+      ...prevState,
+      items: [],
+      count: 0,
+    }));
+
+    if (page === 1) {
+      fetch();
+    } else {
+      setPage(1);
+    }
+  }, [fetch, page]);
+
   useEffect(() => {
     fetch();
   }, [fetch]);
 
   return {
     ...state,
-    next,
     page,
+    refresh,
+    next,
   }
 }
 
@@ -68,5 +97,6 @@ type State = Omit<FetchQuotes['quotesList'], '__typename'> & {
 
 type HookState = State & {
   next: () => void,
+  refresh: () => void,
   page: number,
 }
