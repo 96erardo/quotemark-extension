@@ -9,7 +9,7 @@
         "notifications"
     ],
     "action": {},
-    "options_page": "dist/options/index.html",
+    "options_page": "dist/options.html",
     "background": {
         "service_worker": "dist/background.js"
     },
