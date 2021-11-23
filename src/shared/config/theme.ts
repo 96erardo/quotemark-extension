@@ -82,14 +82,19 @@ export default createTheme({
       color: palette.grayDark,
       letterSpacing: 0,
     },
+    subtitle2: {
+      fontFamily: 'Poppins',
+      fontWeight: 600,
+      fontSize: '0.65rem'
+    },
     body1: {
       fontFamily: 'Barlow',
       fontWeight: 400,
     },
     body2: {
-      fontFamily: 'Poppins',
-      fontWeight: 600,
-      fontSize: '0.65rem'
+      fontFamily: 'Barlow',
+      fontWeight: 400,
+      fontSize: '1.1rem',
     },
     button: {
       fontFamily: 'Poppins',

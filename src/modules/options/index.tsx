@@ -15,10 +15,6 @@ import theme from '@shared/config/theme';
 function Options () {
   const [user, setUser] = useState<FetchUser['user'] | null>(null);
 
-  useEffect(() => {
-    document.title = 'QuoteMark | Options';
-  }, []);
-
   return (
     <UserContext.Provider value={{ user, setUser }}>
       <Box 

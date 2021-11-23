@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useEffect } from 'react';
 import { Placeholder } from '@shared/components/Placeholder';
 import { QuoteItem } from './QuoteItem';
 import { useQuotes } from './hooks/useQuotes';
@@ -13,6 +13,10 @@ export const QuotesView: React.FC = () => {
   const user = useUser();
   const { items, count, loading, refresh, next } = useQuotes(user !== null);
   let content = null;
+
+  useEffect(() => {
+    document.title = 'QuoteMark | List';
+  }, []);
 
   const onLoadMore = useCallback((e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
@@ -52,7 +56,7 @@ export const QuotesView: React.FC = () => {
       <Box 
         width="100%" 
         height="calc(100% - 40px)"
-        overflow="scroll"
+        overflow="auto"
       >
         {quotes}
         {items.length !== count && !loading && (

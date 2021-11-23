@@ -6,6 +6,7 @@ const template = `
 <!DOCTYPE html> 
 <html lang="en">
   <head>
+    <title>QuoteMark</title>
   </head>
   <body>
     <div id="root"></div>
@@ -83,7 +84,7 @@ module.exports = (env) => ({
         use: ['style-loader', 'css-loader']
       },
       {
-        test: /\.(ttf|png)$/i,
+        test: /\.(ttf|png|jpeg)$/i,
         type: 'asset/resource'
       }
     ]
