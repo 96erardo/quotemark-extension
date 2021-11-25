@@ -9,6 +9,7 @@ export const QuoteItemContent: React.FC<Props> = ({ text, checked, collapsed, on
       sx={{
         cursor: 'pointer',
         paddingBottom: !collapsed ? 2 : 0,
+        paddingRight: !collapsed ? 2 : 0,
         whiteSpace: collapsed ? 'nowrap' : 'normal',
         fontWeight: (checked && collapsed) ? 500 : 400,
       }}

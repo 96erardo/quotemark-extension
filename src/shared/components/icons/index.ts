@@ -8,3 +8,4 @@ export * from './InstagramIcon';
 export * from './PayPalIcon';
 export * from './TwitterIcon';
 export * from './YouTubeIcon';
+export * from './MoreIcon';

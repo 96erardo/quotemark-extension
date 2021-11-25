@@ -1,6 +1,7 @@
 import React, { useMemo, useEffect } from 'react';
 import { Placeholder } from '@shared/components/Placeholder';
 import { QuoteItem } from './QuoteItem';
+import { QuoteDeleteModal, QuoteDeleteModalProps } from './QuoteDeleteModal';
 import { useQuotes } from './hooks/useQuotes';
 import { useUser } from '@modules/user/hooks/useUser';
 import { QuotesListHeader } from './QuotesListHeader';
@@ -8,10 +9,12 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Link from '@mui/material/Link';
 import Box from '@mui/material/Box';
 import { useCallback } from 'react';
+import { useState } from 'react';
 
 export const QuotesView: React.FC = () => {
   const user = useUser();
-  const { items, count, loading, refresh, next } = useQuotes(user !== null);
+  const { items, count, loading, refresh, next, update } = useQuotes(user !== null);
+  const [modal, setModal] = useState<Omit<QuoteDeleteModalProps, 'onClose' | 'onDeleted'>>({ open: false });
   let content = null;
 
   useEffect(() => {
@@ -24,18 +27,28 @@ export const QuotesView: React.FC = () => {
     next();
   }, [next]);
 
+  const onDelete = useCallback((id: string, title: string) => {
+    setModal({
+      open: true,
+      id,
+      title
+    })
+  }, []);
+
   const quotes = useMemo(() => (
     items.map(item => (
       <QuoteItem 
         key={item.id}
         quote={item}
+        onUpdate={update}
+        onDelete={onDelete}
       />
     ))
-  ), [items]);
+  ), [items, onDelete, update]);
 
   if (items.length === 0 && !loading) {  
     content = (
-      <Box width="100%" height="calc(100% - 40px)" alignItems="center" justifyContent="center">
+      <Box width="100%" height="calc(100% - 40px)" display="flex" alignItems="center" justifyContent="center">
         <Placeholder loading={loading} />
       </Box>
     );
@@ -83,6 +96,11 @@ export const QuotesView: React.FC = () => {
             />
           </Box>
         )}
+        <QuoteDeleteModal 
+          {...modal} 
+          onDeleted={refresh}
+          onClose={() => setModal({ open: false })}
+        />
       </Box>
     );
   }

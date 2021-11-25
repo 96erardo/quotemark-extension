@@ -16,3 +16,25 @@ export const FETCH_QUOTES = gql`
     }
   }
 `;
+
+export const DELETE_QUOTE = gql`
+  mutation DeleteQuote ($id: ID!) {
+    quoteDelete (id: $id) {
+      success
+      message
+    }
+  }
+`;
+
+export const UPDATE_QUOTE = gql`
+  mutation UpdateQuote ($id: ID!, $name: String!) {
+    quoteUpdate (id: $id, name: $name) {
+      id
+      name
+      content
+      link
+      createdAt
+      __typename
+    }
+  }
+`;

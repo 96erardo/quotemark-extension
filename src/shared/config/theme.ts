@@ -24,6 +24,8 @@ const palette = {
   grayLight_2: '#EEEEEE',
   grayLight_1: '#F8F8F9',
 
+  red: '#FF3D68',
+
   black: '#000',
   white: '#fff',
 }
@@ -47,6 +49,9 @@ export default createTheme({
       A200: palette.grayLight_2,
       A400: palette.gray,
       A700: palette.grayDark,
+    },
+    error: {
+      main: palette.red,
     }
   },
   typography: {
@@ -142,6 +147,28 @@ export default createTheme({
       styleOverrides: {
         root: {
           backdropFilter: 'blur(5px)'
+        }
+      }
+    },
+    MuiMenu: {
+      styleOverrides: {
+        root: {
+          minWidth: '135px'
+        }
+      }
+    },
+    MuiMenuItem: {
+      styleOverrides: {
+        root: {
+          fontFamily: 'Poppins',
+          fontSize: '0.9rem',
+        }
+      }
+    },
+    MuiTypography: {
+      styleOverrides: {
+        root: {
+          outline: 'none',
         }
       }
     },

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { FetchQuotes } from '@shared/graphql-types';
+import { FetchQuotes, UpdateQuote } from '@shared/graphql-types';
 import { fetchQuotes } from '../quote-actions';
 
 const initialState = {
@@ -78,15 +78,25 @@ export function useQuotes (authenticated: boolean):HookState {
     }
   }, [fetch, page]);
 
+  const update = useCallback((quote: UpdateQuote['quoteUpdate']) => {
+    setState(prevState => ({
+      ...prevState,
+      items: prevState.items.map((item) => item.id === quote.id ? quote : item)
+    }))
+  }, []);
+
   useEffect(() => {
     fetch();
   }, [fetch]);
+
+  console.log('items', state.items);
 
   return {
     ...state,
     page,
     refresh,
     next,
+    update,
   }
 }
 
@@ -98,5 +108,6 @@ type State = Omit<FetchQuotes['quotesList'], '__typename'> & {
 type HookState = State & {
   next: () => void,
   refresh: () => void,
+  update: (quote: UpdateQuote['quoteUpdate']) => void,
   page: number,
 }
