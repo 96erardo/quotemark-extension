@@ -7,7 +7,7 @@ import { QuoteItemContent } from './QuoteItemContent';
 import { FetchQuotes, UpdateQuote } from '@shared/graphql-types';
 import { useTheme } from '@mui/material/styles';
 
-export const QuoteItem: React.FC<Props> = ({ quote, onUpdate, onDelete }) => {
+export const QuoteItem: React.FC<Props> = ({ index, quote, onUpdate, onDelete }) => {
   const [checked, setChecked] = useState(false);
   const [collapsed, setCollapsed] = useState(true);
   const theme = useTheme();
@@ -33,7 +33,8 @@ export const QuoteItem: React.FC<Props> = ({ quote, onUpdate, onDelete }) => {
       }}
     >
       <Box flexGrow={0} flexShrink={0} paddingRight={1}>
-        <Checkbox 
+        <Checkbox
+          name={`quote_${index}`}
           size="small" 
           checked={checked}
           onChange={handleChange}
@@ -65,6 +66,7 @@ export const QuoteItem: React.FC<Props> = ({ quote, onUpdate, onDelete }) => {
 }
 
 type Props = {
+  index: number,
   quote: FetchQuotes['quotesList']['items'][0],
   onDelete: (id: string, title: string) => void,
   onUpdate: (quote: UpdateQuote['quoteUpdate']) => void

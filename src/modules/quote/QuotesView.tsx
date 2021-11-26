@@ -1,13 +1,14 @@
-import React, { useMemo, useEffect } from 'react';
+import React, { useMemo, useEffect, useRef, FormEvent } from 'react';
 import { Placeholder } from '@shared/components/Placeholder';
 import { QuoteItem } from './QuoteItem';
 import { QuoteDeleteModal, QuoteDeleteModalProps } from './QuoteDeleteModal';
+import { DeleteManyModal, DeleteManyModalProps } from './DeleteManyModal';
 import { useQuotes } from './hooks/useQuotes';
 import { useUser } from '@modules/user/hooks/useUser';
 import { QuotesListHeader } from './QuotesListHeader';
 import CircularProgress from '@mui/material/CircularProgress';
 import Link from '@mui/material/Link';
-import Box from '@mui/material/Box';
+import Box, { BoxProps } from '@mui/material/Box';
 import { useCallback } from 'react';
 import { useState } from 'react';
 
@@ -15,6 +16,8 @@ export const QuotesView: React.FC = () => {
   const user = useUser();
   const { items, count, loading, refresh, next, update, filter } = useQuotes(user !== null);
   const [modal, setModal] = useState<Omit<QuoteDeleteModalProps, 'onClose' | 'onDeleted'>>({ open: false });
+  const [delMany, setDelMany] = useState<Omit<DeleteManyModalProps, 'onClose' | 'onDeleted'>>({ open: false, ids: [] });
+  const ref = useRef<HTMLFormElement>(null);
   let content = null;
 
   useEffect(() => {
@@ -35,9 +38,28 @@ export const QuotesView: React.FC = () => {
     })
   }, []);
 
+  const onDeleteMany = useCallback((e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const del = items
+      .filter((_, i) => e.currentTarget[`quote_${i}`].checked)
+      .map(item => item.id);
+
+    if (del.length === 0) {
+      // Notification
+
+    } else {
+      setDelMany({
+        open: true,
+        ids: del
+      })
+    }
+  }, [items]);
+
   const quotes = useMemo(() => (
-    items.map(item => (
+    items.map((item, i) => (
       <QuoteItem 
+        index={i}
         key={item.id}
         quote={item}
         onUpdate={update}
@@ -48,14 +70,14 @@ export const QuotesView: React.FC = () => {
 
   if (items.length === 0 && !loading) {  
     content = (
-      <Box width="100%" height="calc(100% - 40px)" display="flex" alignItems="center" justifyContent="center">
+      <Box width="100%" height="100%" display="flex" alignItems="center" justifyContent="center">
         <Placeholder loading={loading} />
       </Box>
     );
   
   } else if (items.length === 0 && loading) {
     content = (
-      <Box width="100%" height="calc(100% - 40px)" display="flex" alignItems="center" justifyContent="center">
+      <Box width="100%" height="100%" display="flex" alignItems="center" justifyContent="center">
         <CircularProgress 
           color="primary" 
           size={30}
@@ -68,7 +90,7 @@ export const QuotesView: React.FC = () => {
     content = (
       <Box 
         width="100%" 
-        height="calc(100% - 40px)"
+        height="100%"
         overflow="auto"
       >
         {quotes}
@@ -110,12 +132,36 @@ export const QuotesView: React.FC = () => {
       width="100%" 
       height="100%"
     >
-      <QuotesListHeader 
-        loading={loading} 
+      <QuotesListHeader
+        loading={loading}
+        onDelete={() => ref.current?.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }))}
         onRefresh={refresh}
         onSearch={filter}
       />
-      {content}
+      <Box 
+        ref={ref}
+        width="100%" 
+        height="calc(100% - 40px)"
+        component={Form}
+        onSubmit={onDeleteMany}
+      >
+        {content}
+      </Box> 
+      <DeleteManyModal 
+        ids={delMany.ids}
+        open={delMany.open}
+        onClose={() => setDelMany({ open: false, ids: [] })}
+        onDeleted={refresh}
+      />
     </Box>
   );
 };
+
+const Form = React.forwardRef<HTMLFormElement, FormProps>((props, ref) => (
+  <form 
+    ref={ref}
+    {...props}
+  />
+))
+
+type FormProps = React.DetailedHTMLProps<React.FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>;
