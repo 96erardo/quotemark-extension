@@ -11,10 +11,12 @@ import { updateQuoteName } from './quote-actions';
 import { format } from 'date-fns';
 import { useState } from 'react';
 import { UpdateQuote } from '@shared/graphql-types';
+import { useSnackbar } from 'notistack';
 
 export const QuoteItemTitle: React.FC<Props> = ({ id, title, date, link, collapsed, onUpdate, onDelete }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [updating, setUpdating] = useState(false);
+  const { enqueueSnackbar } = useSnackbar();
   const open = Boolean(anchorEl);
   const titleRef = useRef<HTMLHeadingElement>(null);
 
@@ -29,7 +31,10 @@ export const QuoteItemTitle: React.FC<Props> = ({ id, title, date, link, collaps
           const [data, err] = await updateQuoteName(id, innerText);
                   
           if (err) {
-            
+            enqueueSnackbar(
+              'Something hapened, could not update the quote\'s title',
+              { variant: 'error' }
+            );
           }
 
           if (data) {
@@ -44,7 +49,7 @@ export const QuoteItemTitle: React.FC<Props> = ({ id, title, date, link, collaps
 
       return () => titleRef.current?.removeEventListener('focusout', onFocus);
     }
-  }, [id, title, onUpdate]);
+  }, [id, title, onUpdate, enqueueSnackbar]);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -100,6 +105,7 @@ const Title = React.forwardRef<HTMLHeadingElement, TitleProps>(({ contentEditabl
   <h6 
     ref={ref} 
     contentEditable={contentEditable}
+    suppressContentEditableWarning={true}
     {...props} 
   />
 ))

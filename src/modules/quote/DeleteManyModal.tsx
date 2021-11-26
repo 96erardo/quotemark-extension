@@ -6,9 +6,11 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { deleteQuote } from './quote-actions';
+import { useSnackbar } from 'notistack';
 
 export const DeleteManyModal: React.FC<DeleteManyModalProps> = ({ open, ids, onClose, onDeleted }) => {
   const [loading, setLoading] = useState(false);
+  const { enqueueSnackbar } = useSnackbar();
 
   const handleDelete = useCallback(async () => {
     let deleted = 0;
@@ -17,7 +19,7 @@ export const DeleteManyModal: React.FC<DeleteManyModalProps> = ({ open, ids, onC
     setLoading(true);
 
     for (const id of ids) {
-      const [err] = await deleteQuote(id);
+      const [, err] = await deleteQuote(id);
 
       if (err) {
         errors += 1;
@@ -28,18 +30,28 @@ export const DeleteManyModal: React.FC<DeleteManyModalProps> = ({ open, ids, onC
     }
 
     if (errors > 0) {
-      // Notification
+      enqueueSnackbar(
+        `${errors} quotes could not be deleted`,
+        {
+          variant: 'error'
+        }
+      )
     }
 
     if (deleted > 0) {
-      // Notification
+      enqueueSnackbar(
+        `${deleted} quotes deleted successfully`,
+        {
+          variant: 'success'
+        }
+      )
     }
 
     setLoading(false);
     onDeleted();
     onClose();
 
-  }, [ids, onDeleted, onClose]);
+  }, [ids, onDeleted, onClose, enqueueSnackbar]);
 
   return (
     <Dialog 

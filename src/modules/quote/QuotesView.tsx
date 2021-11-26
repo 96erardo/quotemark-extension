@@ -1,22 +1,22 @@
-import React, { useMemo, useEffect, useRef, FormEvent } from 'react';
+import React, { useState, useCallback, useMemo, useEffect, useRef, FormEvent } from 'react';
 import { Placeholder } from '@shared/components/Placeholder';
 import { QuoteItem } from './QuoteItem';
 import { QuoteDeleteModal, QuoteDeleteModalProps } from './QuoteDeleteModal';
 import { DeleteManyModal, DeleteManyModalProps } from './DeleteManyModal';
 import { useQuotes } from './hooks/useQuotes';
 import { useUser } from '@modules/user/hooks/useUser';
+import { useSnackbar } from 'notistack';
 import { QuotesListHeader } from './QuotesListHeader';
 import CircularProgress from '@mui/material/CircularProgress';
 import Link from '@mui/material/Link';
-import Box, { BoxProps } from '@mui/material/Box';
-import { useCallback } from 'react';
-import { useState } from 'react';
+import Box from '@mui/material/Box';
 
 export const QuotesView: React.FC = () => {
   const user = useUser();
   const { items, count, loading, refresh, next, update, filter } = useQuotes(user !== null);
   const [modal, setModal] = useState<Omit<QuoteDeleteModalProps, 'onClose' | 'onDeleted'>>({ open: false });
   const [delMany, setDelMany] = useState<Omit<DeleteManyModalProps, 'onClose' | 'onDeleted'>>({ open: false, ids: [] });
+  const { enqueueSnackbar } = useSnackbar();
   const ref = useRef<HTMLFormElement>(null);
   let content = null;
 
@@ -46,7 +46,12 @@ export const QuotesView: React.FC = () => {
       .map(item => item.id);
 
     if (del.length === 0) {
-      // Notification
+      enqueueSnackbar(
+        'Select a few quotes first',
+        {
+          variant: 'error',
+        }
+      )
 
     } else {
       setDelMany({

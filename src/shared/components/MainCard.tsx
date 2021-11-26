@@ -14,7 +14,6 @@ import { AboutUsView } from '@modules/options/AboutUsView';
 import logo from '@shared/assets/images/logo_full_small.png'
 import {
   GlassesIcon,
-  ConfigIcon,
   InfoIcon
 } from '@shared/components/icons';
 
@@ -89,7 +88,7 @@ export function MainCard () {
                 <ListItemText selected={screen === 'quote'} primary="Quotes" />
               </ListItemButton>
             </ListItem>
-            <ListItem disablePadding>
+            {/* <ListItem disablePadding>
               <ListItemButton onClick={() => setScreen('settings')}>
                 <ListItemIcon>
                   <ConfigIcon 
@@ -99,7 +98,7 @@ export function MainCard () {
                 </ListItemIcon>
                 <ListItemText selected={screen === 'settings'} primary="Settings" />
               </ListItemButton>
-            </ListItem>
+            </ListItem> */}
             <ListItem disablePadding>
               <ListItemButton onClick={() => setScreen('about-us')}>
                 <ListItemIcon>

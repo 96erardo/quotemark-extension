@@ -14,7 +14,7 @@ import BarlowItalic from '@shared/assets/fonts/BarlowCondensed-Italic.ttf';
 import BarlowMedium from '@shared/assets/fonts/BarlowCondensed-Medium.ttf';
 import BarlowMediumItalic from '@shared/assets/fonts/BarlowCondensed-MediumItalic.ttf';
 
-const palette = {
+export const palette = {
   purpleDark: '#6A2871',
   purple: '#95389E',
   purpleLight: '#BC45C8',
@@ -25,6 +25,8 @@ const palette = {
   grayLight_1: '#F8F8F9',
 
   red: '#FF3D68',
+
+  green: '#34BE82',
 
   black: '#000',
   white: '#fff',

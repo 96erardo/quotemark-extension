@@ -58,9 +58,7 @@ export async function fetchQuotes (
 
   const { data: { quotesList } } = response;
 
-  return await (new Promise(res => setTimeout(() => {
-    res([quotesList, null])
-  }, 1000)))
+  return [quotesList, null];
 }
 
 export async function updateQuoteName (id: string, name: string): Result<UpdateQuote['quoteUpdate']> {
