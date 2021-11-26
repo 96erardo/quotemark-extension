@@ -22,7 +22,10 @@ import {
  * 
  * @returns The list of quotes
  */
-export async function fetchQuotes (page: number = 1): Result<FetchQuotes['quotesList'], ApolloError> {
+export async function fetchQuotes (
+  page: number = 1,
+  search?: string,
+): Result<FetchQuotes['quotesList'], ApolloError> {
   const first = 20;
   const skip = first * (page - 1);
   let response = null;
@@ -34,6 +37,17 @@ export async function fetchQuotes (page: number = 1): Result<FetchQuotes['quotes
       variables: {
         first,
         skip,
+        ...(search ? (
+          {
+            filter: {
+              OR: [
+                { name: { contains: search } },
+                { content: { contains: search } },
+                { link: { contains: search } },
+              ]
+            }
+          }
+        ) : ({}))
       }
     })
     

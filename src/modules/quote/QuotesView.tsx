@@ -13,7 +13,7 @@ import { useState } from 'react';
 
 export const QuotesView: React.FC = () => {
   const user = useUser();
-  const { items, count, loading, refresh, next, update } = useQuotes(user !== null);
+  const { items, count, loading, refresh, next, update, filter } = useQuotes(user !== null);
   const [modal, setModal] = useState<Omit<QuoteDeleteModalProps, 'onClose' | 'onDeleted'>>({ open: false });
   let content = null;
 
@@ -112,7 +112,8 @@ export const QuotesView: React.FC = () => {
     >
       <QuotesListHeader 
         loading={loading} 
-        onRefresh={refresh}  
+        onRefresh={refresh}
+        onSearch={filter}
       />
       {content}
     </Box>
