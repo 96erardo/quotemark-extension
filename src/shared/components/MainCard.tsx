@@ -10,9 +10,10 @@ import { ListItemText } from '@shared/components/List';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import { useTheme } from '@mui/material/styles';
 import { QuotesView } from '@modules/quote/QuotesView';
+import { AboutUsView } from '@modules/options/AboutUsView';
+import logo from '@shared/assets/images/logo_full_small.png'
 import {
   GlassesIcon,
-  ConfigIcon,
   InfoIcon
 } from '@shared/components/icons';
 
@@ -43,6 +44,12 @@ export function MainCard () {
     )
   }
 
+  if (screen === 'about-us') {
+    view = (
+      <AboutUsView />
+    );
+  }
+
   return (
     <Paper elevation={20} sx={{ width: '100%', height: '100%' }}>
       <Box
@@ -55,9 +62,7 @@ export function MainCard () {
         justifyContent="space-between"
       >
         {avatar}
-        <Avatar>
-          QM
-        </Avatar>
+        <img alt="App Logo" src={logo} />
       </Box>
       <Box
         width="100%"
@@ -83,7 +88,7 @@ export function MainCard () {
                 <ListItemText selected={screen === 'quote'} primary="Quotes" />
               </ListItemButton>
             </ListItem>
-            <ListItem disablePadding>
+            {/* <ListItem disablePadding>
               <ListItemButton onClick={() => setScreen('settings')}>
                 <ListItemIcon>
                   <ConfigIcon 
@@ -93,7 +98,7 @@ export function MainCard () {
                 </ListItemIcon>
                 <ListItemText selected={screen === 'settings'} primary="Settings" />
               </ListItemButton>
-            </ListItem>
+            </ListItem> */}
             <ListItem disablePadding>
               <ListItemButton onClick={() => setScreen('about-us')}>
                 <ListItemIcon>

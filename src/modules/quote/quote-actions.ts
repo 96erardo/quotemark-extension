@@ -1,10 +1,18 @@
 import { client } from '@shared/config/apollo';
-import { FETCH_QUOTES } from './quote-queries';
 import { ApolloError } from '@apollo/client';
 import { Result } from '@shared/types';
 import { 
+  FETCH_QUOTES,
+  DELETE_QUOTE,
+  UPDATE_QUOTE
+} from './quote-queries';
+import { 
   FetchQuotes, 
-  FetchQuotesVariables 
+  FetchQuotesVariables,
+  DeleteQuote,
+  DeleteQuoteVariables,
+  UpdateQuote,
+  UpdateQuoteVariables
 } from '@shared/graphql-types';
 
 /**
@@ -14,7 +22,10 @@ import {
  * 
  * @returns The list of quotes
  */
-export async function fetchQuotes (page: number = 1): Result<FetchQuotes['quotesList'], ApolloError> {
+export async function fetchQuotes (
+  page: number = 1,
+  search?: string,
+): Result<FetchQuotes['quotesList'], ApolloError> {
   const first = 20;
   const skip = first * (page - 1);
   let response = null;
@@ -26,6 +37,17 @@ export async function fetchQuotes (page: number = 1): Result<FetchQuotes['quotes
       variables: {
         first,
         skip,
+        ...(search ? (
+          {
+            filter: {
+              OR: [
+                { name: { contains: search } },
+                { content: { contains: search } },
+                { link: { contains: search } },
+              ]
+            }
+          }
+        ) : ({}))
       }
     })
     
@@ -36,9 +58,65 @@ export async function fetchQuotes (page: number = 1): Result<FetchQuotes['quotes
 
   const { data: { quotesList } } = response;
 
-  return await (new Promise(res => setTimeout(() => {
-    res([quotesList, null])
-  }, 2000)))
+  return [quotesList, null];
+}
 
-  // return [quotesList, null];
+export async function updateQuoteName (id: string, name: string): Result<UpdateQuote['quoteUpdate']> {
+  let response = null;
+
+  try {
+    response = await client.mutate<UpdateQuote, UpdateQuoteVariables>({
+      mutation: UPDATE_QUOTE,
+      variables: {
+        id,
+        name
+      }
+    })
+    
+  } catch (e) {
+
+    return [null, e as ApolloError];
+  }
+
+  if (!response.data?.quoteUpdate) {
+    return [null, new Error("Something hapened and we couldn't update the quote")]
+  }
+
+  const { data: { quoteUpdate } } = response;
+
+  return [quoteUpdate, null];
+}
+
+/**
+ * Deletes the specified quote
+ * 
+ * @param id - The id of the quote to delete
+ * 
+ * @returns If the operation was successful or not
+ */
+export async function deleteQuote (id: string): Result<boolean> {
+  let response = null;
+
+  try {
+    response = await client.mutate<DeleteQuote, DeleteQuoteVariables>({
+      mutation: DELETE_QUOTE,
+      variables: {
+        id
+      }
+    })
+
+  } catch (e) {
+
+    return [null, e as ApolloError];
+  }
+  
+  const { data } = response;
+
+  if (!data?.quoteDelete || !data.quoteDelete.success) {
+    const err = data?.quoteDelete.message || 'Something hapened';
+
+    return [null, new Error(err)]
+  }
+
+  return [true, null];
 }

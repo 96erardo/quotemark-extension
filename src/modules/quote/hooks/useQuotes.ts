@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { FetchQuotes } from '@shared/graphql-types';
+import { FetchQuotes, UpdateQuote } from '@shared/graphql-types';
 import { fetchQuotes } from '../quote-actions';
 
 const initialState = {
@@ -17,7 +17,7 @@ const initialState = {
  */
 export function useQuotes (authenticated: boolean):HookState {
   const [state, setState] = useState<State>(initialState);
-  const [page, setPage] = useState(1);
+  const [list, setList] = useState<ListState>({ page: 1, filter: '' });
 
   const fetch = useCallback(async () => {
     if (!authenticated) {
@@ -34,7 +34,7 @@ export function useQuotes (authenticated: boolean):HookState {
       error: null
     }));
 
-    const [quotesList, err] = await fetchQuotes(page);
+    const [quotesList, err] = await fetchQuotes(list.page, list.filter);
 
     if (err) {
       setState(prevState => ({
@@ -48,7 +48,7 @@ export function useQuotes (authenticated: boolean):HookState {
       setState(prevState => ({
         ...prevState,
         count: quotesList.count,
-        items: page === 1 ? quotesList.items : [
+        items: list.page === 1 ? quotesList.items : [
           ...prevState.items,
           ...quotesList.items,
         ],
@@ -56,11 +56,14 @@ export function useQuotes (authenticated: boolean):HookState {
         error: null,
       }))
     }
-  }, [authenticated, page]);
+  }, [authenticated, list]);
 
   const next = useCallback(() => {
     if (state.items.length < state.count) {
-      setPage(prevPage => prevPage + 1);
+      setList(prevState => ({
+        ...prevState,
+        page: prevState.page + 1,
+      }));
     }
   }, [state]);
 
@@ -71,12 +74,33 @@ export function useQuotes (authenticated: boolean):HookState {
       count: 0,
     }));
 
-    if (page === 1) {
+    if (list.page === 1) {
       fetch();
     } else {
-      setPage(1);
+      setList(prevState => ({
+        ...prevState,
+        page: 1,
+      }));
     }
-  }, [fetch, page]);
+  }, [fetch, list.page]);
+
+  const update = useCallback((quote: UpdateQuote['quoteUpdate']) => {
+    setState(prevState => ({
+      ...prevState,
+      items: prevState.items.map((item) => item.id === quote.id ? quote : item)
+    }))
+  }, []);
+
+  const filter = useCallback((value: string) => {
+    setState(prevState => ({
+      ...prevState,
+      loading: true,
+      items: [],
+      count: 0,
+    }));
+
+    setList({ page: 1, filter: value });
+  }, []);
 
   useEffect(() => {
     fetch();
@@ -84,9 +108,11 @@ export function useQuotes (authenticated: boolean):HookState {
 
   return {
     ...state,
-    page,
+    page: list.page,
     refresh,
     next,
+    update,
+    filter,
   }
 }
 
@@ -95,8 +121,15 @@ type State = Omit<FetchQuotes['quotesList'], '__typename'> & {
   error: Error | null,
 }
 
+type ListState = {
+  page: number,
+  filter: string,
+}
+
 type HookState = State & {
   next: () => void,
   refresh: () => void,
+  update: (quote: UpdateQuote['quoteUpdate']) => void,
+  filter: (value: string) => void,
   page: number,
 }

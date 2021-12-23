@@ -14,7 +14,7 @@ import BarlowItalic from '@shared/assets/fonts/BarlowCondensed-Italic.ttf';
 import BarlowMedium from '@shared/assets/fonts/BarlowCondensed-Medium.ttf';
 import BarlowMediumItalic from '@shared/assets/fonts/BarlowCondensed-MediumItalic.ttf';
 
-const palette = {
+export const palette = {
   purpleDark: '#6A2871',
   purple: '#95389E',
   purpleLight: '#BC45C8',
@@ -23,6 +23,10 @@ const palette = {
   gray: '#BEBEBE',
   grayLight_2: '#EEEEEE',
   grayLight_1: '#F8F8F9',
+
+  red: '#FF3D68',
+
+  green: '#34BE82',
 
   black: '#000',
   white: '#fff',
@@ -47,6 +51,9 @@ export default createTheme({
       A200: palette.grayLight_2,
       A400: palette.gray,
       A700: palette.grayDark,
+    },
+    error: {
+      main: palette.red,
     }
   },
   typography: {
@@ -82,14 +89,19 @@ export default createTheme({
       color: palette.grayDark,
       letterSpacing: 0,
     },
+    subtitle2: {
+      fontFamily: 'Poppins',
+      fontWeight: 600,
+      fontSize: '0.65rem'
+    },
     body1: {
       fontFamily: 'Barlow',
       fontWeight: 400,
     },
     body2: {
-      fontFamily: 'Poppins',
-      fontWeight: 600,
-      fontSize: '0.65rem'
+      fontFamily: 'Barlow',
+      fontWeight: 400,
+      fontSize: '1.1rem',
     },
     button: {
       fontFamily: 'Poppins',
@@ -137,6 +149,28 @@ export default createTheme({
       styleOverrides: {
         root: {
           backdropFilter: 'blur(5px)'
+        }
+      }
+    },
+    MuiMenu: {
+      styleOverrides: {
+        root: {
+          minWidth: '135px'
+        }
+      }
+    },
+    MuiMenuItem: {
+      styleOverrides: {
+        root: {
+          fontFamily: 'Poppins',
+          fontSize: '0.9rem',
+        }
+      }
+    },
+    MuiTypography: {
+      styleOverrides: {
+        root: {
+          outline: 'none',
         }
       }
     },

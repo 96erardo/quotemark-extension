@@ -44,7 +44,7 @@ export type DateTimePredicate = {
 export type DeleteResult = {
   __typename?: 'DeleteResult';
   message?: Maybe<Scalars['String']>;
-  success?: Maybe<Scalars['Boolean']>;
+  success: Scalars['Boolean'];
 };
 
 export type IdPredicate = {
@@ -62,8 +62,8 @@ export type IdPredicate = {
 export type Mutation = {
   __typename?: 'Mutation';
   quoteCreate?: Maybe<Quote>;
-  quoteDelete?: Maybe<DeleteResult>;
-  quoteUpdate?: Maybe<Quote>;
+  quoteDelete: DeleteResult;
+  quoteUpdate: Quote;
   reportCreate?: Maybe<Report>;
   reportUpdate?: Maybe<Report>;
   storyCreate?: Maybe<Story>;
@@ -140,7 +140,7 @@ export type Query = {
   reportsList?: Maybe<ReportListResponse>;
   storiesList?: Maybe<UsersStoryListResponse>;
   user: User;
-  usersList?: Maybe<UserListResponse>;
+  usersList: UserListResponse;
 };
 
 
@@ -375,6 +375,21 @@ export type FetchQuotesVariables = Exact<{
 
 
 export type FetchQuotes = { __typename?: 'Query', quotesList: { __typename: 'QuoteListResponse', count: number, items: Array<{ __typename: 'Quote', id: string, name: string, content: string, link: string, createdAt: any }> } };
+
+export type DeleteQuoteVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type DeleteQuote = { __typename?: 'Mutation', quoteDelete: { __typename?: 'DeleteResult', success: boolean, message?: string | null | undefined } };
+
+export type UpdateQuoteVariables = Exact<{
+  id: Scalars['ID'];
+  name: Scalars['String'];
+}>;
+
+
+export type UpdateQuote = { __typename?: 'Mutation', quoteUpdate: { __typename: 'Quote', id: string, name: string, content: string, link: string, createdAt: any } };
 
 export type FetchUserVariables = Exact<{ [key: string]: never; }>;
 

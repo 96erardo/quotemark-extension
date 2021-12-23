@@ -12,7 +12,7 @@ export const QuoteItemDate: React.FC<Props> = ({ date, collapsed }) => {
 
   return (
     <Box flexGrow={0} flexShrink={0} width={120} px={2}>
-      <Typography variant="body2" textAlign="right">
+      <Typography variant="subtitle2" textAlign="right">
         {`${label} ago`}
       </Typography>
     </Box>
