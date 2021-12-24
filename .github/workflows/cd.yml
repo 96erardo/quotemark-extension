@@ -2,7 +2,7 @@ name: Continuous Delivery
 on:
   push:
     branches:
-      - master
+      - main
 env:
   API_ENDPOINT: ${{ secrets.API_ENDPOINT }}
 jobs: 
@@ -13,5 +13,15 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '14'
+      - uses: montudor/action-zip@v1
       - run: npm install
       - run: npm run build
+      - run: zip -qq -r extension.zip assets dist src error.png success.png manifest.json 
+      - uses: Klemensas/chrome-extension-upload-action@master
+        with:
+          client-id: ${{ secrets.CWS_CLIENT_ID }}
+          client-secret: ${{ secrets.CWS_CLIENT_SECRET }}
+          refresh-token: ${{ secrets.CWS_REFRESH_TOKEN }}
+          file-name: './extension.zip'
+          app-id: ${{ secrets.CWS_EXTENSION_APP_ID }}
+          publish: false
