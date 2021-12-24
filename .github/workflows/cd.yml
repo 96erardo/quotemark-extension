@@ -17,7 +17,7 @@ jobs:
       - run: npm install
       - run: npm run build
       - run: zip -qq -r extension.zip assets dist src error.png success.png manifest.json 
-      - run: less extension.zip
+      - run: less -f extension.zip
       - uses: Klemensas/chrome-extension-upload-action@master
         with:
           client-id: ${{ secrets.CWS_CLIENT_ID }}
