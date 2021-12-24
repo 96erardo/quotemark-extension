@@ -7,7 +7,7 @@
         "48": "assets/icon48.png",
         "128": "assets/icon128.png"
     },
-    "version": "0.1",
+    "version": "1.0.0",
     "manifest_version": 3,
     "permissions": [
         "identity",
@@ -20,7 +20,8 @@
         "service_worker": "dist/background.js"
     },
     "host_permissions": [
-        "http://localhost:3000/"
+        "http://localhost:3000/",
+        "https://quotemark.xyz"
     ],
     "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnefOAGvseGSlJ5yFUKwLktaLny6QymGZgK5IXxpaXtAvQyMsfnIxuaCqxcqLd9WnGDSz6LuXn/ywHL258xTezDxWLCvRs3MQ550IAJyskTkcMJ4UbeN+A3YfNsDx+4VEszB1WnNiwlKQY9AaE7rzddc8AyqvlIJPN+xVYTmeqYLWBy2JMEthM513VqWws08b5owBohWvn2KRIDrHth7inP++G0xyXCnThJ2DX/6P2P2j31FEGiBjjM3rucFM08TdEcBRnXpNeY8jt49hTD+r1vn6kH9IhPfC9UQ2/aS7LRDfLi8xwF1sufEsJ2iyXDlnsgL+uZTgOFpyhxco2mAouwIDAQAB",
     "oauth2": {
