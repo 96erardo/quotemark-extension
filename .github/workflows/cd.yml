@@ -11,7 +11,18 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
+      - uses: montudor/action-zip@v1
         with:
           node-version: '14'
       - run: npm install
       - run: npm run build
+      - run: zip -qq -r extension.zip assets dist src error.png success.png manifest.json 
+      - run: less extension.zip
+      - uses: Klemensas/chrome-extension-upload-action@1.4.1
+        with:
+          client-id: ${{ secrets.CWS_CLIENT_ID }}
+          client-secret: ${{ secrets.CWS_CLIENT_SECRET }}
+          refresh-token: ${{ secrets.CWS_REFRESH_TOKEN }}
+          file-name: './extension.zip'
+          app-id: ${{ secrets.CWS_EXTENSION_APP_ID }}
+          publish: false
