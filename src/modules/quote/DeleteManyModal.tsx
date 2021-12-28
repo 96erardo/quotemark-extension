@@ -31,7 +31,7 @@ export const DeleteManyModal: React.FC<DeleteManyModalProps> = ({ open, ids, onC
 
     if (errors > 0) {
       enqueueSnackbar(
-        `${errors} quotes could not be deleted`,
+        chrome.i18n.getMessage('delete_many_error', [errors]),
         {
           variant: 'error'
         }
@@ -40,7 +40,7 @@ export const DeleteManyModal: React.FC<DeleteManyModalProps> = ({ open, ids, onC
 
     if (deleted > 0) {
       enqueueSnackbar(
-        `${deleted} quotes deleted successfully`,
+        chrome.i18n.getMessage('delete_many_success', [deleted]),
         {
           variant: 'success'
         }
@@ -50,7 +50,6 @@ export const DeleteManyModal: React.FC<DeleteManyModalProps> = ({ open, ids, onC
     setLoading(false);
     onDeleted();
     onClose();
-
   }, [ids, onDeleted, onClose, enqueueSnackbar]);
 
   return (
@@ -65,14 +64,12 @@ export const DeleteManyModal: React.FC<DeleteManyModalProps> = ({ open, ids, onC
         borderColor="grey.200"
       >
         <Typography variant="h5">
-          Delete quote
+          {chrome.i18n.getMessage('delete_title')}
         </Typography>
       </Box>
       <Box p={2}>
         <Typography variant="body1">
-          You are about to delete <b>{ids.length}</b> quotes,
-          are you sure you want to continue performing this action?
-          After deleted, it is impossible to access this information again.
+          {chrome.i18n.getMessage('delete_many_warning_1')} <b>{ids.length}</b> {chrome.i18n.getMessage('delete_many_warning_2')}
         </Typography>
       </Box>
       <Stack
@@ -91,7 +88,7 @@ export const DeleteManyModal: React.FC<DeleteManyModalProps> = ({ open, ids, onC
           color="secondary"
           disableElevation
         >
-          Cancel
+          {chrome.i18n.getMessage('cancel')}
         </Button>
         <LoadingButton
           loading={loading} 
@@ -100,7 +97,7 @@ export const DeleteManyModal: React.FC<DeleteManyModalProps> = ({ open, ids, onC
           onClick={handleDelete}
           disableElevation 
         >
-          Yes, Delete
+          {chrome.i18n.getMessage('yes_delete')}
         </LoadingButton>
       </Stack>
     </Dialog>

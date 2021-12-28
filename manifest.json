@@ -1,6 +1,6 @@
 {
-    "name": "QuoteMark",
-    "description": "Highlight content and save it for your.",
+    "name": "__MSG_extension_name__",
+    "description": "__MSG_extension_description__",
     "icons": {
         "16": "assets/icon16.png",
         "32": "assets/icon32.png",
@@ -9,6 +9,7 @@
     },
     "version": "1.0.0",
     "manifest_version": 3,
+    "default_locale": "en",
     "permissions": [
         "identity",
         "contextMenus",
@@ -21,7 +22,7 @@
     },
     "host_permissions": [
         "http://localhost:3000/",
-        "https://quotemark.xyz"
+        "https://quotemark.xyz/"
     ],
     "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnefOAGvseGSlJ5yFUKwLktaLny6QymGZgK5IXxpaXtAvQyMsfnIxuaCqxcqLd9WnGDSz6LuXn/ywHL258xTezDxWLCvRs3MQ550IAJyskTkcMJ4UbeN+A3YfNsDx+4VEszB1WnNiwlKQY9AaE7rzddc8AyqvlIJPN+xVYTmeqYLWBy2JMEthM513VqWws08b5owBohWvn2KRIDrHth7inP++G0xyXCnThJ2DX/6P2P2j31FEGiBjjM3rucFM08TdEcBRnXpNeY8jt49hTD+r1vn6kH9IhPfC9UQ2/aS7LRDfLi8xwF1sufEsJ2iyXDlnsgL+uZTgOFpyhxco2mAouwIDAQAB",
     "oauth2": {

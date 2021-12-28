@@ -41,7 +41,7 @@ export const QuotesListHeader: React.FC<Props> = ({ loading, onRefresh, onSearch
         onClose={() => setAnchorEl(null)}
       >
         <MenuItem variant="danger" onClick={onDelete}>
-          Delete Selected
+          {chrome.i18n.getMessage('delete_many')}
         </MenuItem>
       </Menu>
     </Box>

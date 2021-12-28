@@ -24,7 +24,7 @@ export const Search: React.FC<Props> = ({ onSearch }) => {
       name="quotemar-search"
       value={text}
       onChange={handleChange}
-      placeholder="Search"
+      placeholder={chrome.i18n.getMessage('search')}
       sx={{
         width: '200px'
       }}
