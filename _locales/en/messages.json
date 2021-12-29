@@ -1,0 +1,105 @@
+{
+  "extension_name": {
+    "message": "QuoteMark",
+    "description": "The extension name"
+  },
+  "extension_description": {
+    "message": "Highlight content and save it for your.",
+    "description": "The extension's description"
+  },
+  "placeholder_title": {
+    "message": "Looks like there is nothing here",
+    "description": "Placeholder title when there are no quotes saved"
+  },
+  "placeholder_subtitle": {
+    "message": "Save some content to start your journey",
+    "description": "Placeholder subtitle when there are no quotes saved"
+  },
+  "search": {
+    "message": "Search",
+    "description": "Search's text input placeholder"
+  },
+  "about_us": {
+    "message": "About us",
+    "description": "Main menu more information option"
+  },
+  "delete": {
+    "message": "Delete"
+  },
+  "delete_title": {
+    "message": "Delete Quote",
+    "description": "Delete quote modal title"
+  },
+  "delete_warning_1": {
+    "message": "You are about to delete the"
+  },
+  "delete_warning_2": {
+    "message": "quote, are you sure you want to continue performing this action? After deleted, it is impossible to access this quote again."
+  },
+  "delete_error": {
+    "message": "Something happened, the quote could not be deleted",
+    "description": "Error message when deleting a quote"
+  },
+  "delete_success": {
+    "message": "Quote deleted successfully",
+    "description": "Success message when a quote is deleted"
+  },
+  "delete_many": {
+    "message": "Delete Selected",
+    "description": "Delete selected quotes button"
+  },
+  "delete_many_warning_1": {
+    "message": "You are about to delete"
+  },
+  "delete_many_warning_2": {
+    "message": "quotes, are you sure you want to continue performing this action? After complete, it is impossible to access this data again."
+  },
+  "delete_many_error": {
+    "message": "$number$ quotes could not be deleted",
+    "description": "Error message when some quotes failed to be deleted",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "delete_many_success": {
+    "message": "$number$ quotes deleted successfully",
+    "description": "Success message when quotes are deleted",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "select_error": {
+    "message": "Select a few quotes first",
+    "description": "Error message when no quote is selected and a batch action is triggered"
+  },
+  "update_error": {
+    "message": "Something hapened, could not update the quote's title",
+    "description": "Error message when updating a quote"
+  },
+  "about_us_1": {
+    "message": "Hello, my name is Gerardo García and i’m a software developer. I had the idea of QuoteMark a while ago because i sometimes forget about important details i read on the Internet, that situation sometimes led to silly mistakes and inefficient solutions that made me lose time.",
+    "description": "First paragraph from about-us page"
+  },
+  "about_us_2": {
+    "message": "For me, this is a personal project to make me solve that little problem and learn a few things in the process. I also documented the development lifecycle on my YouTube channel to make it a bit more fun, so if you know a bit of spanish you can watch the videos i made on the subject.",
+    "description": "Second paragraph from about-us page"
+  },
+  "about_us_3": {
+    "message": "I have plans to continue developing this little side projects and documenting them on YouTube, so if you are interested in this kind of topics, you can follow me on social media to be informed of what i’m doing.",
+    "description": "Third paragraph from about-us page"
+  },
+  "about_us_4": {
+    "message": "I really hope this tool is overall useful for you, and if you catch any bug or have any idea on a new feature you can DM me through social media and i will respond as soon as possible. On the other hand if you, for any reason, want to support this little work that i do with a donation i’ll be more than grateful for your help.",
+    "description": "Fourth paragraph from about-us page"
+  },
+  "cancel": {
+    "message": "Cancel" 
+  },
+  "yes_delete": {
+    "message": "Yes, Delete"
+  }
+}

@@ -47,7 +47,7 @@ export const QuotesView: React.FC = () => {
 
     if (del.length === 0) {
       enqueueSnackbar(
-        'Select a few quotes first',
+        chrome.i18n.getMessage('select_error'),
         {
           variant: 'error',
         }

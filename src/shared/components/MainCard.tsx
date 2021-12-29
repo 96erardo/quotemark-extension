@@ -107,7 +107,7 @@ export function MainCard () {
                     color={screen === 'about-us' ? primary : grey} 
                   />
                 </ListItemIcon>
-                <ListItemText selected={screen === 'about-us'} primary="About us" />
+                <ListItemText selected={screen === 'about-us'} primary={chrome.i18n.getMessage('about_us')} />
               </ListItemButton>
             </ListItem>
           </List>
