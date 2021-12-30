@@ -20,10 +20,10 @@ export const Placeholder: React.FC<Props> = ({ loading }) => {
             width={400} 
           />
           <Typography textAlign="center" variant="h4">
-            Looks like there is nothing here
+            {chrome.i18n.getMessage('placeholder_title')}
           </Typography>
           <Typography textAlign="center" variant="subtitle1">
-            Save some content to start your journey.
+            {chrome.i18n.getMessage('placeholder_subtitle')}
           </Typography>
         </>
       )}

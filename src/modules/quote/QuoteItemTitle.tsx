@@ -94,7 +94,7 @@ export const QuoteItemTitle: React.FC<Props> = ({ id, title, date, link, collaps
         onClose={() => setAnchorEl(null)}
       >
         <MenuItem variant="danger" onClick={() => onDelete(id, title)}>
-          Delete
+          {chrome.i18n.getMessage('delete')}
         </MenuItem>
       </Menu>
     </Box>

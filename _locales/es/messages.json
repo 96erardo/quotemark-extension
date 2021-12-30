@@ -1,0 +1,105 @@
+{
+  "extension_name": {
+    "message": "QuoteMark",
+    "description": "Nombre de la extensión"
+  },
+  "extension_description": {
+    "message": "Guarda el contenido que desees solo para ti.",
+    "description": "Descripción de la extensión"
+  },
+  "placeholder_title": {
+    "message": "Parece que no hay nada por aquí",
+    "description": "Título del placeholder cuando no hay quotes guardadas"
+  },
+  "placeholder_subtitle": {
+    "message": "Guarda algo de contenido para empezar a usar la extensión",
+    "description": "Subtítulo del placeholder cuando no hay quotes guardadas"
+  },
+  "search": {
+    "message": "Buscar",
+    "description": "Placeholder de la barra de búsqueda"
+  },
+  "about_us": {
+    "message": "Acerca de",
+    "description": "Opción del menú para información del desarrollador"
+  },
+  "delete": {
+    "message": "Eliminar"
+  },
+  "delete_title": {
+    "message": "Eliminar Quote",
+    "description": "Título del modal para eliminar quote"
+  },
+  "delete_warning_1": {
+    "message": "Estás a punto de eliminar"
+  },
+  "delete_warning_2": {
+    "message": ", ¿estás seguro de querer hacer esto? Despues de eliminarlo no podrás acceder a esta información nunca más."
+  },
+  "delete_error": {
+    "message": "Hubo un error, no se pudo borrar el quote",
+    "description": "Mensaje de error mientras se elimina un quote"
+  },
+  "delete_success": {
+    "message": "Quote eliminada correctamente",
+    "description": "Mensaje de éxito cuando se elimina un quote"
+  },
+  "delete_many": {
+    "message": "Eliminar Selección",
+    "description": "Botón para eliminar los quotes seleccionados"
+  },
+  "delete_many_warning_1": {
+    "message": "Estás a punto de eliminar"
+  },
+  "delete_many_warning_2": {
+    "message": "quotes, ¿estás seguro de querer hacer esto? Una vez terminado no podrás acceder a esta información nunca más."
+  },
+  "delete_many_error": {
+    "message": "$number$ quotes no se pudieron eliminar",
+    "description": "Mensaje de error cuando no pudieron ser eliminados todos los quotes",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "delete_many_success": {
+    "message": "$number$ quotes eliminadas exitosamente",
+    "description": "Mensaje de éxito cuando se eliminaron los quotes seleccionados",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "select_error": {
+    "message": "Selecciona un quote para continuar",
+    "description": "Mensaje de error que aparece cuando no se ha seleccionado ningún quote y se ejecuta un batch action"
+  },
+  "update_error": {
+    "message": "Hubo un error, no se pudo cambiar el título del quote",
+    "description": "Mensaje de error mientras se edita el título del quote"
+  },
+  "about_us_1": {
+    "message": "Hola, mi nombre es Gerardo García y soy desarrollador de software. La idea de QuoteMark nació hace un tiempo cuando me di cuenta que al leer cosas por Internet, muchas veces olvidaba pequeños detalles importantes de eso que había leído, dicha situación hacía que cometiera pequeños errores o no me permitía implementar la mejor solución posible a un problema.",
+    "description": "Primer parrafo de la página about-us"
+  },
+  "about_us_2": {
+    "message": "Para mi, esto es un proyecto personal para resolver ese pequeño problema y aprender un par de cosas en el camino. También trato de documentar el desarrollo de este proyecto (y otros más) en mi canal de Youtube para hacerlo un poco más divertido, así que si estás interesado puedes pasar por allí y ver mi contenido.",
+    "description": "Segundo parrafo de la página about-us"
+  },
+  "about_us_3": {
+    "message": "Mi objetivo a futuro es poder continuar con el desarrollo de estos proyectos y de igual forma seguir documentandolos en YouTube, así que si te interesan este tipo de temas, me puedes seguir en mis redes sociales para estar informado de lo que estoy haciendo.",
+    "description": "Tercer parrafo de la página about-us"
+  },
+  "about_us_4": {
+    "message": "De verdad espero que esta extensión sea útil para ti, y que si notas algún bug, tienes una idea para un nuevo feature o cualquier cosa por el estilo, no dudes en mandarme un mensaje privado a mis redes sociales que yo responderé tan rápido como pueda. Por otro lado, si tu por alguna razón quieres apoyarme en este trabajo que hago con una donación, estaré más que agradecido por tu ayuda.",
+    "description": "Cuarto parrafo de la página about-us"
+  },
+  "cancel": {
+    "message": "Cancelar" 
+  },
+  "yes_delete": {
+    "message": "Si, Eliminar"
+  }
+}

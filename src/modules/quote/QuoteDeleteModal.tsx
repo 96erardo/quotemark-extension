@@ -23,7 +23,7 @@ export const QuoteDeleteModal: React.FC<QuoteDeleteModalProps> = ({ open, id, ti
         setLoading(false);
 
         enqueueSnackbar(
-          'Something happened, the quote could not be deleted',
+          chrome.i18n.getMessage('delete_error'),
           {
             variant: 'error'
           }
@@ -31,7 +31,7 @@ export const QuoteDeleteModal: React.FC<QuoteDeleteModalProps> = ({ open, id, ti
 
       } else {
         enqueueSnackbar(
-          'Quote deleted successfully',
+          chrome.i18n.getMessage('delete_success'),
           {
             variant: 'success'
           }
@@ -55,14 +55,12 @@ export const QuoteDeleteModal: React.FC<QuoteDeleteModalProps> = ({ open, id, ti
         borderColor="grey.200"
       >
         <Typography variant="h5">
-          Delete quote
+          {chrome.i18n.getMessage('delete_title')}
         </Typography>
       </Box>
       <Box p={2}>
         <Typography variant="body1">
-          You are about to delete the <b>"{title}"</b> quote,
-          are you sure you want to continue performing this action?
-          After deleted, it is impossible to access this quote again.
+          {chrome.i18n.getMessage('delete_warning_1')} <b>"{title}"</b> {chrome.i18n.getMessage('delete_warning_2')}
         </Typography>
       </Box>
       <Stack
@@ -81,7 +79,7 @@ export const QuoteDeleteModal: React.FC<QuoteDeleteModalProps> = ({ open, id, ti
           color="secondary"
           disableElevation
         >
-          Cancel
+          {chrome.i18n.getMessage('cancel')}
         </Button>
         <LoadingButton
           loading={loading} 
@@ -90,7 +88,7 @@ export const QuoteDeleteModal: React.FC<QuoteDeleteModalProps> = ({ open, id, ti
           onClick={handleDelete}
           disableElevation 
         >
-          Yes, Delete
+          {chrome.i18n.getMessage('yes_delete')}
         </LoadingButton>
       </Stack>
     </Dialog>
