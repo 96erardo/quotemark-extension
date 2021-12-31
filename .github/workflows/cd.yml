@@ -15,8 +15,10 @@ jobs:
           node-version: '14'
       - uses: montudor/action-zip@v1
       - run: npm install
+      - run: echo API_ENDPOINT=$API_ENDPOINT > .env 
+      - run: cat .env
       - run: npm run build
-      - run: zip -qq -r extension.zip assets dist _locales src error.png success.png manifest.json 
+      - run: zip -qq -r extension.zip assets dist _locales src error.png success.png manifest.json
       - uses: Klemensas/chrome-extension-upload-action@master
         with:
           client-id: ${{ secrets.CWS_CLIENT_ID }}
