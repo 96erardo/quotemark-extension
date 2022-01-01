@@ -12,6 +12,7 @@ import Container from '@mui/material/Container';
 import { client } from '@shared/config/apollo';
 import { ApolloProvider } from '@apollo/client';
 import { useSnackbarStyle } from '@shared/config/snackbar';
+import { DialogHandler } from 'react-dialog-handler';
 import theme from '@shared/config/theme';
 
 function Options () {
@@ -50,10 +51,12 @@ function Options () {
 
 ReactDOM.render(
   <ApolloProvider client={client}>
-    <ThemeProvider theme={theme}>
-      <Options />
-      <CssBaseline />
-    </ThemeProvider>
+    <DialogHandler>
+      <ThemeProvider theme={theme}>
+        <Options />
+        <CssBaseline />
+      </ThemeProvider>
+    </DialogHandler>
   </ApolloProvider>
   , document.getElementById('root')
 );

@@ -85,10 +85,12 @@ export function useQuotes (authenticated: boolean):HookState {
   }, [fetch, list.page]);
 
   const update = useCallback((quote: UpdateQuote['quoteUpdate']) => {
-    setState(prevState => ({
-      ...prevState,
-      items: prevState.items.map((item) => item.id === quote.id ? quote : item)
-    }))
+    if (quote) {
+      setState(prevState => ({
+        ...prevState,
+        items: prevState.items.map((item) => item.id === quote.id ? quote : item)
+      }))
+    }
   }, []);
 
   const filter = useCallback((value: string) => {

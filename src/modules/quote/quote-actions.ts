@@ -61,6 +61,14 @@ export async function fetchQuotes (
   return [quotesList, null];
 }
 
+/**
+ * Updates the title of the specified quote
+ * 
+ * @param id - The quote id
+ * @param name - The quote's new title
+ * 
+ * @returns The updated quote
+ */
 export async function updateQuoteName (id: string, name: string): Result<UpdateQuote['quoteUpdate']> {
   let response = null;
 

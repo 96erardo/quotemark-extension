@@ -80,6 +80,22 @@
     "message": "Hubo un error, no se pudo cambiar el título del quote",
     "description": "Mensaje de error mientras se edita el título del quote"
   },
+  "add_to_stories": {
+    "message": "Agregar a Historias",
+    "description": "Item de menú del quote para agregar un quote como historia"
+  },
+  "create_story_title": {
+    "message": "Crear Historia",
+    "description": "Título del modal utillizado para crear historias a partir de quotes"
+  },
+  "story_create_success": {
+    "message": "Historia creada! Tic Tac, Tic Tac",
+    "description": "Success message when story is created"
+  },
+  "story_create_error": {
+    "message": "No se pudo crear la historia, intentalo nuevamente",
+    "description": "Error message when creating a story"
+  },
   "about_us_1": {
     "message": "Hola, mi nombre es Gerardo García y soy desarrollador de software. La idea de QuoteMark nació hace un tiempo cuando me di cuenta que al leer cosas por Internet, muchas veces olvidaba pequeños detalles importantes de eso que había leído, dicha situación hacía que cometiera pequeños errores o no me permitía implementar la mejor solución posible a un problema.",
     "description": "Primer parrafo de la página about-us"
