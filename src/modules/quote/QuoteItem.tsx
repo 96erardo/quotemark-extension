@@ -5,17 +5,27 @@ import { QuoteItemDate } from './QuoteItemDate';
 import { QuoteItemTitle } from './QuoteItemTitle';
 import { QuoteItemContent } from './QuoteItemContent';
 import { FetchQuotes, UpdateQuote } from '@shared/graphql-types';
+import { modalId, Params } from '@modules/story/CreateStoryDialog';
+import { useDialogOpener } from 'react-dialog-handler';
 import { useTheme } from '@mui/material/styles';
 
 export const QuoteItem: React.FC<Props> = ({ index, quote, onUpdate, onDelete }) => {
   const [checked, setChecked] = useState(false);
   const [collapsed, setCollapsed] = useState(true);
+  const openDialog = useDialogOpener();
   const theme = useTheme();
 
   const handleClick = () => setCollapsed(prevState => !prevState);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setChecked(e.target.checked);
+  }
+
+  const handleNewStory = () => {
+    openDialog<Params>(modalId, {
+      id: quote.id,
+      content: quote.content,
+    })
   }
 
   return (
@@ -49,6 +59,7 @@ export const QuoteItem: React.FC<Props> = ({ index, quote, onUpdate, onDelete })
           collapsed={collapsed}
           onUpdate={onUpdate}
           onDelete={onDelete}
+          onStory={handleNewStory}
         />
         <QuoteItemContent 
           text={quote.content}

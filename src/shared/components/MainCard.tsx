@@ -88,17 +88,6 @@ export function MainCard () {
                 <ListItemText selected={screen === 'quote'} primary="Quotes" />
               </ListItemButton>
             </ListItem>
-            {/* <ListItem disablePadding>
-              <ListItemButton onClick={() => setScreen('settings')}>
-                <ListItemIcon>
-                  <ConfigIcon 
-                    size={30}
-                    color={screen === 'settings' ? primary : grey} 
-                  />
-                </ListItemIcon>
-                <ListItemText selected={screen === 'settings'} primary="Settings" />
-              </ListItemButton>
-            </ListItem> */}
             <ListItem disablePadding>
               <ListItemButton onClick={() => setScreen('about-us')}>
                 <ListItemIcon>
