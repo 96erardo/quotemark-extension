@@ -5,6 +5,7 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import { FetchMyStories, Typography as TypographyNames } from '@shared/graphql-types';
+import { formatDistanceToNowStrict } from 'date-fns';
 import {
   TrashIcon,
   EyeIcon,
@@ -13,6 +14,12 @@ import {
 
 export const StoryCard: React.FC<Props> = ({ story }) => {
   const handleLinkClick = () => window.open(story.link, '_blank')
+
+  const date = formatDistanceToNowStrict(new Date(story.createdAt))
+    .replace(/ seconds?/, 's')
+    .replace(/ minutes?/, 'm')
+    .replace(/ hours?/, 'h')
+    .replace(/ days?/, 'd')
 
   return (
     <Paper 
@@ -25,12 +32,23 @@ export const StoryCard: React.FC<Props> = ({ story }) => {
       <Box
         py={6}
         px={4}
+        position="relative"
         minHeight="160px"
         display="flex"
         alignItems="center"
         justifyContent="center"
         sx={{ backgroundColor: story.color }}
       >
+        <Typography sx={{
+          color: 'rgba(255, 255, 255, .8)',
+          fontSize: '0.8rem',
+          fontFamily: 'Poppins',
+          position: 'absolute',
+          top: 10,
+          right: 10
+        }}>
+          {date}
+        </Typography>
         <Typography
           variant="body1"
           align="center"
