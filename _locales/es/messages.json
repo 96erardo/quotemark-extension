@@ -80,6 +80,10 @@
     "message": "Hubo un error, no se pudo cambiar el título del quote",
     "description": "Mensaje de error mientras se edita el título del quote"
   },
+  "story_menu_title": {
+    "message": "Mis Historias",
+    "description": "Opción de menú lateral para acceder a las historias"
+  },
   "add_to_stories": {
     "message": "Agregar a Historias",
     "description": "Item de menú del quote para agregar un quote como historia"
@@ -117,5 +121,8 @@
   },
   "yes_delete": {
     "message": "Si, Eliminar"
+  },
+  "load_more": {
+    "message": "Cargar Más"
   }
 }

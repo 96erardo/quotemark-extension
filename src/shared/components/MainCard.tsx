@@ -104,7 +104,7 @@ export function MainCard () {
                     color={screen === 'stories' ? primary : grey} 
                   />
                 </ListItemIcon>
-                <ListItemText selected={screen === 'stories'} primary="Stories" />
+                <ListItemText selected={screen === 'stories'} primary={chrome.i18n.getMessage('story_menu_title')} />
               </ListItemButton>
             </ListItem>
             <ListItem disablePadding>
