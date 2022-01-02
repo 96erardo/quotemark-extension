@@ -14,4 +14,20 @@ export const CREATE_STORY = gql`
       id
     }
   }
-`
+`;
+
+export const FETCH_MY_STORIES = gql`
+  query FetchMyStories ($first: Int, $skip: Int) {
+    myStoriesList (first: $first, skip: $skip) {
+      count
+      items {
+        id
+        color
+        typography
+        content
+        link
+        createdAt
+      }
+    }
+  }
+`;

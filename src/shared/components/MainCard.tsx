@@ -11,10 +11,12 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import { useTheme } from '@mui/material/styles';
 import { QuotesView } from '@modules/quote/QuotesView';
 import { AboutUsView } from '@modules/options/AboutUsView';
+import { MyStoriesView } from '@modules/story/MyStoriesView';
 import logo from '@shared/assets/images/logo_full_small.png'
 import {
   GlassesIcon,
-  InfoIcon
+  InfoIcon,
+  SandClockIcon
 } from '@shared/components/icons';
 
 export function MainCard () {
@@ -42,6 +44,12 @@ export function MainCard () {
     view = (
       <QuotesView />
     )
+  }
+
+  if (screen === 'stories') {
+    view = (
+      <MyStoriesView />
+    );
   }
 
   if (screen === 'about-us') {
@@ -89,6 +97,17 @@ export function MainCard () {
               </ListItemButton>
             </ListItem>
             <ListItem disablePadding>
+              <ListItemButton onClick={() => setScreen('stories')}>
+                <ListItemIcon>
+                  <SandClockIcon 
+                    size={30}
+                    color={screen === 'stories' ? primary : grey} 
+                  />
+                </ListItemIcon>
+                <ListItemText selected={screen === 'stories'} primary="Stories" />
+              </ListItemButton>
+            </ListItem>
+            <ListItem disablePadding>
               <ListItemButton onClick={() => setScreen('about-us')}>
                 <ListItemIcon>
                   <InfoIcon 
@@ -113,4 +132,4 @@ export function MainCard () {
   );
 }
 
-type Screen = 'quote' | 'settings' | 'about-us';
+type Screen = 'quote' | 'stories' | 'settings' | 'about-us';

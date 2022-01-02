@@ -136,7 +136,7 @@ export type MutationUserUpdateArgs = {
 
 export type Query = {
   __typename?: 'Query';
-  myStoriesList?: Maybe<StoryListResponse>;
+  myStoriesList: StoryListResponse;
   quotesList: QuoteListResponse;
   reportsList?: Maybe<ReportListResponse>;
   storiesList?: Maybe<UsersStoryListResponse>;
@@ -407,6 +407,14 @@ export type CreateStoryVariables = Exact<{
 
 
 export type CreateStory = { __typename?: 'Mutation', storyCreate: { __typename?: 'Story', id: string } };
+
+export type FetchMyStoriesVariables = Exact<{
+  first?: Maybe<Scalars['Int']>;
+  skip?: Maybe<Scalars['Int']>;
+}>;
+
+
+export type FetchMyStories = { __typename?: 'Query', myStoriesList: { __typename?: 'StoryListResponse', count: number, items: Array<{ __typename?: 'Story', id: string, color: string, typography: Typography, content: string, link: string, createdAt: any }> } };
 
 export type FetchUserVariables = Exact<{ [key: string]: never; }>;
 
