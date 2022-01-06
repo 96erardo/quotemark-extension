@@ -80,6 +80,10 @@
     "message": "Something hapened, could not update the quote's title",
     "description": "Error message when updating a quote"
   },
+  "story_menu_title": {
+    "message": "My Stories",
+    "description": "Side menu option to access user stories"
+  },
   "add_to_stories": {
     "message": "Add To Stories",
     "description": "Menu item text to add a quote as a storie"
@@ -117,5 +121,8 @@
   },
   "yes_delete": {
     "message": "Yes, Delete"
+  },
+  "load_more": {
+    "message": "Load More"
   }
 }

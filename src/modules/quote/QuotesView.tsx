@@ -111,7 +111,7 @@ export const QuotesView: React.FC = () => {
                 fontSize: '0.75rem',
               }}
             >
-              Load More
+              {chrome.i18n.getMessage('load_more')}
             </Link>
           </Box>
         )}
