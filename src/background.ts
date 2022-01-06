@@ -1,6 +1,6 @@
-chrome.action.onClicked.addListener(() => {
-  chrome.runtime.openOptionsPage();
-})
+// chrome.action.onClicked.addListener(() => {
+//   chrome.runtime.openOptionsPage();
+// })
 
 chrome.identity.onSignInChanged.addListener((_, signedIn) => {
   chrome.contextMenus.update('store', {

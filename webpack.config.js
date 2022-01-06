@@ -19,6 +19,7 @@ module.exports = (env) => ({
   target: 'web',
   entry: {
     options: './src/modules/options/index.tsx',
+    popup: './src/modules/story/StoriesPopup.tsx',
     background: './src/background.ts'
   },
   output: {
@@ -37,6 +38,17 @@ module.exports = (env) => ({
         'charset': 'UTF-8'
       },
       chunks: ['options']
+    }),
+    new HtmlWebpackPlugin({
+      title: 'Quotemark',
+      filename: 'popup.html',
+      inject: 'body',
+      templateContent: template,   
+      meta: {
+        'viewport': 'initial-scale=1, width=device-width',
+        'charset': 'UTF-8'
+      },
+      chunks: ['popup']
     }),
     new Dotenv(),
   ],

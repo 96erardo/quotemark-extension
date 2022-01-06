@@ -28,8 +28,10 @@ export const palette = {
 
   green: '#34BE82',
 
+  dark: '#1F1D36',
   black: '#000',
   white: '#fff',
+  whiteLight: 'rgba(255, 255, 255, .5)'
 }
 
 export default createTheme({
@@ -43,7 +45,7 @@ export default createTheme({
       main: palette.black,
     },
     background: {
-      paper: palette.white,
+      paper: palette.dark,
       default: palette.grayLight_1,
     },
     grey: {
@@ -107,7 +109,7 @@ export default createTheme({
       fontFamily: 'Poppins',
       fontWeight: 600,
       letterSpacing: 0,
-    }
+    },
   },
   components: {
     MuiDialog: {

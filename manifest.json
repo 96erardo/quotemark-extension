@@ -15,7 +15,9 @@
         "contextMenus",
         "notifications"
     ],
-    "action": {},
+    "action": {
+        "default_popup": "dist/popup.html"
+    },
     "options_page": "dist/options.html",
     "background": {
         "service_worker": "dist/background.js"

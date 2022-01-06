@@ -13,7 +13,7 @@ import { client } from '@shared/config/apollo';
 import { ApolloProvider } from '@apollo/client';
 import { useSnackbarStyle } from '@shared/config/snackbar';
 import { DialogHandler } from 'react-dialog-handler';
-import theme from '@shared/config/theme';
+import theme from '@shared/config/theme-options';
 
 function Options () {
   const [user, setUser] = useState<FetchUser['user'] | null>(null);
