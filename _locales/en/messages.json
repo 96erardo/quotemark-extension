@@ -100,7 +100,7 @@
     "description": "Error message when no quote is selected and a batch action is triggered"
   },
   "update_error": {
-    "message": "Something hapened, could not update the quote's title",
+    "message": "Something happened, could not update the quote's title",
     "description": "Error message when updating a quote"
   },
   "about_us_1": {

@@ -32,7 +32,7 @@ export const QuoteItemTitle: React.FC<Props> = ({ id, title, date, link, collaps
                   
           if (err) {
             enqueueSnackbar(
-              'Something hapened, could not update the quote\'s title',
+              chrome.i18n.getMessage('update_error'),
               { variant: 'error' }
             );
           }
