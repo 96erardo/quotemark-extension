@@ -9,10 +9,13 @@ import { GoogleIcon } from './icons';
 import welcome from '@shared/assets/images/welcome.png';
 import { fetchUser } from '@modules/user/user-actions';
 import { UserContext } from '@modules/user/user-context';
+import { OnboardingError } from './OnboardingError';
+import { ErrorCodes } from '@shared/types';
 
 export function Onboarding  () {
   const [open, setOpen] = useState(true);
   const [loading, setLoading] = useState(true);
+  const [failed, setFailed] = useState(false);
   const [signIn, setSignIn] = useState(false);
   const { setUser } = useContext(UserContext);
 
@@ -22,6 +25,15 @@ export function Onboarding  () {
 
       if (err) {
         setLoading(false);
+
+        if (err.graphQLErrors) {
+          const [{ extensions }] = err.graphQLErrors;
+          const { code } = extensions;
+
+          if (code === ErrorCodes.ServerException) {
+            setFailed(true);
+          }
+        }
       
       } else {
         setUser(user);
@@ -38,10 +50,24 @@ export function Onboarding  () {
         setSignIn(false);
       
       } else {
-        const [user] = await fetchUser();
+        const [user, err] = await fetchUser();
 
-        setUser(user);
-        setOpen(false);
+        if (err) {
+          setLoading(false);
+  
+          if (err.graphQLErrors) {
+            const [{ extensions }] = err.graphQLErrors;
+            const { code } = extensions;
+  
+            if (code === ErrorCodes.ServerException) {
+              setFailed(true);
+            }
+          }
+        
+        } else {
+          setUser(user);
+          setOpen(false);
+        }
       }
     })
   }, [setUser]);
@@ -70,7 +96,7 @@ export function Onboarding  () {
     <Dialog 
       open={open} 
       fullWidth
-      maxWidth="md"
+      maxWidth={failed ? 'sm' : 'md'}
       disableEscapeKeyDown={true}
     >
       <Box 
@@ -81,28 +107,34 @@ export function Onboarding  () {
         alignItems="center"
       >
         <DialogTitle sx={{ fontSize: '2.5rem' }}>
-          Welcome to QuoteMark
+          {failed ? 'Ups...' : chrome.i18n.getMessage('welcome')}
         </DialogTitle>
-        <Box width={500} mb={2}>
-          <img
-            src={welcome}
-            style={{ 
-              width: '100%',
-              height: 'auto'
-            }}
-          />
-        </Box>
-        <LoadingButton
-          loading={signIn}
-          color="secondary"
-          variant="outlined" 
-          disableElevation
-          loadingPosition="start"
-          startIcon={<GoogleIcon size={20}/>}
-          onClick={onSignIn}
-        >
-          Sign in with Google
-        </LoadingButton>
+        {failed ? (
+          <OnboardingError />
+        ) : (
+         <>
+          <Box width={500} mb={2}>
+            <img
+              src={welcome}
+              style={{ 
+                width: '100%',
+                height: 'auto'
+              }}
+            />
+          </Box>
+          <LoadingButton
+            loading={signIn}
+            color="secondary"
+            variant="outlined" 
+            disableElevation
+            loadingPosition="start"
+            startIcon={<GoogleIcon size={20}/>}
+            onClick={onSignIn}
+          >
+            {chrome.i18n.getMessage('google_oauth')}
+          </LoadingButton>
+         </> 
+        )}
       </Box>
     </Dialog>
   );

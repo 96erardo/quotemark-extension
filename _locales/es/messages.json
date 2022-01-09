@@ -1,4 +1,27 @@
 {
+  "welcome": {
+    "message": "Bienvenido a QuoteMark",
+    "description": "Título de bienvenida en modal de onboarding"
+  },
+  "google_oauth": {
+    "message": "Iniciar con Google",
+    "description": "Texto del botón para iniciar sesión con Google"
+  },
+  "auth_error_1": {
+    "message": "Parece que algo falló mientras intentamos iniciar tu sesión, por favor refresca la página para intentarlo nuevamente.",
+    "description": "First paragraph from authentication error placeholder"
+  },
+  "auth_error_2": {
+    "message": "Si el problema persiste puedes registrar un bug en la",
+    "description": "second paragraph from authentication error placeholder"
+  },
+  "extension_page": {
+    "message": "página de la extensión"
+  },
+  "auth_error_3": {
+    "message": "y lo arreglaremos tan pronto como sea posible.",
+    "description": "Third paragraph from authentication error placeholder"
+  },
   "extension_name": {
     "message": "QuoteMark",
     "description": "Nombre de la extensión"

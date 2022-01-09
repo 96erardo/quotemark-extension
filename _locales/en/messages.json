@@ -1,4 +1,27 @@
 {
+  "welcome": {
+    "message": "Welcome to QuoteMark",
+    "description": "Welcome message on onboarding"
+  },
+  "google_oauth": {
+    "message": "Sign in with google",
+    "description": "Label for login button"
+  },
+  "auth_error_1": {
+    "message": "It looks like something failed while we were trying to log you in, please try again by refreshing this page.",
+    "description": "First paragraph from authentication error placeholder"
+  },
+  "auth_error_2": {
+    "message": "If the problem persists you can leave a bug report on the",
+    "description": "second paragraph from authentication error placeholder"
+  },
+  "extension_page": {
+    "message": "extension's page"
+  },
+  "auth_error_3": {
+    "message": "and we will try to fix it as soon as possible.",
+    "description": "Third paragraph from authentication error placeholder"
+  },
   "extension_name": {
     "message": "QuoteMark",
     "description": "The extension name"
