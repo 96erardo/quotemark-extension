@@ -26,13 +26,17 @@ export function Onboarding  () {
       if (err) {
         setLoading(false);
 
-        if (err.graphQLErrors) {
+        if (err.graphQLErrors.length) {
           const [{ extensions }] = err.graphQLErrors;
           const { code } = extensions;
 
           if (code === ErrorCodes.ServerException) {
             setFailed(true);
           }
+        }
+
+        if (err.networkError) {
+          setFailed(true);
         }
       
       } else {
@@ -62,6 +66,10 @@ export function Onboarding  () {
             if (code === ErrorCodes.ServerException) {
               setFailed(true);
             }
+          }
+
+          if (err.networkError) {
+            setFailed(true);
           }
         
         } else {

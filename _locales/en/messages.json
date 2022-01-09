@@ -124,5 +124,8 @@
   },
   "yes_delete": {
     "message": "Yes, Delete"
+  },
+  "general_error": {
+    "message": "Something happened, please try again"
   }
 }

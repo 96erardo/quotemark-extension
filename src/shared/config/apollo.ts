@@ -35,9 +35,8 @@ const authLink = setContext((_, prevContext) => {
   })
 })
 
-const errorLink = onError(({ graphQLErrors, networkError, operation, forward }) => {
-  console.log('error')
-  if (graphQLErrors) {
+const errorLink = onError(({ graphQLErrors, operation, forward }) => {
+  if (graphQLErrors?.length) {
     const [error] = graphQLErrors;
     const context = operation.getContext();
     
@@ -54,36 +53,11 @@ const errorLink = onError(({ graphQLErrors, networkError, operation, forward }) 
 
 const retryLink = new RetryLink({
   attempts: {
-    max: 2,
-    retryIf: (response: RetryResponse, operation) => {
-      console.log('response', JSON.stringify(response));
-      console.log('operation', JSON.stringify(operation));
-
-      if (response?.result?.errors) {
-        return response.result.errors.some(error => {
-          return error.extensions.code === ErrorCodes.ServerException;
-        })
-      }
-
-      return false;
-    }
+    max: 3
   }
 })
 
-type RetryResponse = {
-  name: string,
-  statusCode: 500,
-  result?: {
-    errors?: Array<{
-      message: string,
-      extensions: {
-        code: number
-      }
-    }>
-  }
-}
-
 export const client = new ApolloClient({
-  link: from([errorLink, authLink, httpLink]),
+  link: from([retryLink, errorLink, authLink, httpLink]),
   cache: new InMemoryCache(),
 })

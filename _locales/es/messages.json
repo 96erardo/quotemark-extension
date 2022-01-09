@@ -124,5 +124,8 @@
   },
   "yes_delete": {
     "message": "Si, Eliminar"
+  },
+  "general_error": {
+    "message": "Parece que hubo un error, por favor intentelo nuevamente"
   }
 }
