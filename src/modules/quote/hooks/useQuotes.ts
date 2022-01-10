@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { FetchQuotes, UpdateQuote } from '@shared/graphql-types';
 import { fetchQuotes } from '../quote-actions';
+import { ApolloError } from '@apollo/client';
 
 const initialState = {
   items: [],
@@ -120,7 +121,7 @@ export function useQuotes (authenticated: boolean):HookState {
 
 type State = Omit<FetchQuotes['quotesList'], '__typename'> & {
   loading: boolean,
-  error: Error | null,
+  error: ApolloError | null,
 }
 
 type ListState = {
