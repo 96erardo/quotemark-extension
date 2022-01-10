@@ -13,7 +13,7 @@ import Box from '@mui/material/Box';
 
 export const QuotesView: React.FC = () => {
   const user = useUser();
-  const { items, count, loading, refresh, next, update, filter } = useQuotes(user !== null);
+  const { items, count, loading, refresh, next, update, filter, error } = useQuotes(user !== null);
   const [modal, setModal] = useState<Omit<QuoteDeleteModalProps, 'onClose' | 'onDeleted'>>({ open: false });
   const [delMany, setDelMany] = useState<Omit<DeleteManyModalProps, 'onClose' | 'onDeleted'>>({ open: false, ids: [] });
   const { enqueueSnackbar } = useSnackbar();
@@ -23,6 +23,18 @@ export const QuotesView: React.FC = () => {
   useEffect(() => {
     document.title = 'QuoteMark | List';
   }, []);
+
+  useEffect(() => {
+    if (error) {
+      enqueueSnackbar(
+        chrome.i18n.getMessage('general_error'),
+        {
+          variant: 'error',
+          autoHideDuration: 5000,
+        }
+      )
+    }
+  }, [error]);
 
   const onLoadMore = useCallback((e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
@@ -75,9 +87,7 @@ export const QuotesView: React.FC = () => {
 
   if (items.length === 0 && !loading) {  
     content = (
-      <Box width="100%" height="100%" display="flex" alignItems="center" justifyContent="center">
-        <Placeholder loading={loading} />
-      </Box>
+      <Placeholder />
     );
   
   } else if (items.length === 0 && loading) {
