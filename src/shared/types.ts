@@ -16,3 +16,8 @@ export class ServerError extends Error {
     this.name = 'ServerError';
   }
 }
+
+export type TypographyNames =
+  'Arial' |
+  'Poppins' |
+  'Barlow';

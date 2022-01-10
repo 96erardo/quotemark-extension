@@ -8,6 +8,7 @@ import { useUser } from '@modules/user/hooks/useUser';
 import { useSnackbar } from 'notistack';
 import { QuotesListHeader } from './QuotesListHeader';
 import CircularProgress from '@mui/material/CircularProgress';
+import { CreateStoryDialog } from '@modules/story/CreateStoryDialog';
 import Link from '@mui/material/Link';
 import Box from '@mui/material/Box';
 
@@ -122,7 +123,7 @@ export const QuotesView: React.FC = () => {
                 fontSize: '0.75rem',
               }}
             >
-              Load More
+              {chrome.i18n.getMessage('load_more')}
             </Link>
           </Box>
         )}
@@ -140,6 +141,7 @@ export const QuotesView: React.FC = () => {
           onDeleted={refresh}
           onClose={() => setModal({ open: false })}
         />
+        <CreateStoryDialog />
       </Box>
     );
   }

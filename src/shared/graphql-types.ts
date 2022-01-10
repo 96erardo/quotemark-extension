@@ -63,10 +63,10 @@ export type Mutation = {
   __typename?: 'Mutation';
   quoteCreate?: Maybe<Quote>;
   quoteDelete: DeleteResult;
-  quoteUpdate: Quote;
+  quoteUpdate?: Maybe<Quote>;
   reportCreate?: Maybe<Report>;
   reportUpdate?: Maybe<Report>;
-  storyCreate?: Maybe<Story>;
+  storyCreate: Story;
   storyDelete?: Maybe<DeleteResult>;
   userBan?: Maybe<User>;
   userSetRole?: Maybe<User>;
@@ -105,6 +105,7 @@ export type MutationReportUpdateArgs = {
 export type MutationStoryCreateArgs = {
   color?: Maybe<Scalars['String']>;
   quote: StoryQuoteRelationInput;
+  typography?: Maybe<Typography>;
 };
 
 
@@ -135,7 +136,7 @@ export type MutationUserUpdateArgs = {
 
 export type Query = {
   __typename?: 'Query';
-  myStoriesList?: Maybe<StoryListResponse>;
+  myStoriesList: StoryListResponse;
   quotesList: QuoteListResponse;
   reportsList?: Maybe<ReportListResponse>;
   storiesList?: Maybe<UsersStoryListResponse>;
@@ -272,14 +273,15 @@ export enum Status {
 
 export type Story = {
   __typename?: 'Story';
-  color?: Maybe<Scalars['String']>;
-  content?: Maybe<Scalars['String']>;
-  createdAt?: Maybe<Scalars['DateTime']>;
+  color: Scalars['String'];
+  content: Scalars['String'];
+  createdAt: Scalars['DateTime'];
   deletedAt?: Maybe<Scalars['DateTime']>;
-  id?: Maybe<Scalars['ID']>;
-  link?: Maybe<Scalars['String']>;
-  updatedAt?: Maybe<Scalars['DateTime']>;
-  user?: Maybe<User>;
+  id: Scalars['ID'];
+  link: Scalars['String'];
+  typography: Typography;
+  updatedAt: Scalars['DateTime'];
+  user: User;
 };
 
 export type StoryFilter = {
@@ -316,6 +318,12 @@ export type StringPredicate = {
   not_starts_with?: Maybe<Scalars['String']>;
   starts_with?: Maybe<Scalars['String']>;
 };
+
+export enum Typography {
+  Arial = 'Arial',
+  Barlow = 'Barlow',
+  Poppins = 'Poppins'
+}
 
 export type User = {
   __typename?: 'User';
@@ -389,7 +397,24 @@ export type UpdateQuoteVariables = Exact<{
 }>;
 
 
-export type UpdateQuote = { __typename?: 'Mutation', quoteUpdate: { __typename: 'Quote', id: string, name: string, content: string, link: string, createdAt: any } };
+export type UpdateQuote = { __typename?: 'Mutation', quoteUpdate?: { __typename: 'Quote', id: string, name: string, content: string, link: string, createdAt: any } | null | undefined };
+
+export type CreateStoryVariables = Exact<{
+  quote: Scalars['ID'];
+  color?: Maybe<Scalars['String']>;
+  typography?: Maybe<Typography>;
+}>;
+
+
+export type CreateStory = { __typename?: 'Mutation', storyCreate: { __typename?: 'Story', id: string } };
+
+export type FetchMyStoriesVariables = Exact<{
+  first?: Maybe<Scalars['Int']>;
+  skip?: Maybe<Scalars['Int']>;
+}>;
+
+
+export type FetchMyStories = { __typename?: 'Query', myStoriesList: { __typename?: 'StoryListResponse', count: number, items: Array<{ __typename?: 'Story', id: string, color: string, typography: Typography, content: string, link: string, createdAt: any }> } };
 
 export type FetchUserVariables = Exact<{ [key: string]: never; }>;
 
