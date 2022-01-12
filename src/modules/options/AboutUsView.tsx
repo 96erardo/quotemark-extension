@@ -24,6 +24,7 @@ export const AboutUsView: React.FC = () => {
     <Box 
       width="100%" 
       height="100%"
+      overflow="auto"
       p={2}
     >
       <Grid container spacing={2}>
@@ -44,6 +45,17 @@ export const AboutUsView: React.FC = () => {
                 width: '70%'
               }}
             />
+            <a 
+              href="https://www.producthunt.com/posts/quotemark?utm_source=badge-review&utm_medium=badge&utm_souce=badge-quotemark#discussion-body" 
+              target="_blank"
+              style={{ width: '90%' }}
+            >
+                <img 
+                  src="https://api.producthunt.com/widgets/embed-image/v1/review.svg?post_id=325092&theme=dark" 
+                  alt="QuoteMark - Save interesting text found on the Internet | Product Hunt" 
+                  style={{ width: '100%' }}
+                />
+            </a>
           </Stack>
         </Grid>
         <Grid item xs={8}>

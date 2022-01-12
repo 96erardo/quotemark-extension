@@ -88,9 +88,7 @@ export const QuotesView: React.FC = () => {
 
   if (items.length === 0 && !loading) {  
     content = (
-      <Box width="100%" height="100%" display="flex" alignItems="center" justifyContent="center">
-        <Placeholder loading={loading} />
-      </Box>
+      <Placeholder />
     );
   
   } else if (items.length === 0 && loading) {
