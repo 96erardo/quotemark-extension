@@ -5,18 +5,23 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
+import { StoriesList } from './StoriesList';
+import { Stories } from './StoriesContext';
+import { StoryView } from './StoryView';
 import { HouseIcon } from '@shared/components/icons';
 import theme, { palette } from '@shared/config/theme-popup';
+import '@shared/config/scrollbar.css';
 
 const StoriesPopup: React.FC = () => {
   return (
     <Box 
-      width={300} 
+      width={350} 
       height={500}
       bgcolor="background.paper"
     >
       <Box 
-        p={2}
+        px={2}
+        py={1}
         display="flex"
         flexDirection="row"
         alignItems="center"
@@ -32,6 +37,7 @@ const StoriesPopup: React.FC = () => {
           <HouseIcon size={20} color={palette.whiteLight} />
         </IconButton>
       </Box>
+      <StoriesList />
     </Box>
   );
 }
@@ -47,8 +53,12 @@ const styles = {
 
 ReactDOM.render(
   <ThemeProvider theme={theme}>
-    <StoriesPopup />
-    <CssBaseline />
+    <Stories>
+      <StoryView>
+        <StoriesPopup />
+        <CssBaseline />
+      </StoryView>
+    </Stories>
   </ThemeProvider>,
   document.getElementById('root'),
 )

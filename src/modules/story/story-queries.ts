@@ -31,3 +31,25 @@ export const FETCH_MY_STORIES = gql`
     }
   }
 `;
+
+export const FETCH_PUBLIC_STORIES = gql`
+  query FetchPublicStories ($first: Int, $skip: Int) {
+    storiesList (first: $first, skip: $skip) {
+      count
+      items {
+        id
+        color
+        typography
+        content
+        link
+        user {
+          id
+          firstName
+          lastName
+          avatar
+        }
+        createdAt
+      }
+    }
+  }
+`
