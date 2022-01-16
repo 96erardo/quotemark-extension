@@ -28,7 +28,7 @@ const StoriesPopup: React.FC = () => {
         justifyContent="space-between"
       >
         <Typography sx={styles.label}>
-          Stories
+          {chrome.i18n.getMessage('story_popup_title')}
         </Typography>
         <IconButton 
           size="small"

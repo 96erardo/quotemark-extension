@@ -103,6 +103,9 @@
     "message": "Something happened, could not update the quote's title",
     "description": "Error message when updating a quote"
   },
+  "story_popup_title": {
+    "message": "Stories"
+  },
   "story_menu_title": {
     "message": "My Stories",
     "description": "Side menu option to access user stories"

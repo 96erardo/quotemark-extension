@@ -103,6 +103,9 @@
     "message": "Hubo un error, no se pudo cambiar el título del quote",
     "description": "Mensaje de error mientras se edita el título del quote"
   },
+  "story_popup_title": {
+    "message": "Historias"
+  },
   "story_menu_title": {
     "message": "Mis Historias",
     "description": "Opción de menú lateral para acceder a las historias"

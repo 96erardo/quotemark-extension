@@ -106,11 +106,9 @@ export async function fetchMyStories (
 export async function fetchPublicStories (
   page: number = 1,
 ): Result<FetchPublicStories['storiesList'], ApolloError> {
-  const first = 3;
+  const first = 8;
   const skip = first * (page - 1);
   let response = null;
-
-  await (new Promise(res => setTimeout(() => res(100), 2500)));
 
   try {
     response = await client.query<FetchPublicStories, FetchPublicStoriesVariables>({
