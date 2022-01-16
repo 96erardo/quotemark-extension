@@ -16,7 +16,7 @@ const StoriesPopup: React.FC = () => {
   return (
     <Box 
       width={350} 
-      height={500}
+      height={477}
       bgcolor="background.paper"
     >
       <Box 

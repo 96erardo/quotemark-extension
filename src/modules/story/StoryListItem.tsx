@@ -19,6 +19,7 @@ export const StoryListItem: React.FC<Props> = ({ story, index }) => {
       px={2}
       py={1}
       spacing={1}
+      width="100%"
       direction="row"
       alignItems="stretch"
       onClick={() => setStoryView(index)}
