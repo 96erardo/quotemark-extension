@@ -5,26 +5,52 @@ import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import CircularProgress from '@mui/material/CircularProgress';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import LinkIcon from '@mui/icons-material/Link';
+import { palette } from '@shared/config/theme-popup';
 import { FetchPublicStories, Typography as TypographyNames } from '@shared/graphql-types';
 import { useSetStoryView } from './StoryView';
 import { formatDistanceToNow } from 'date-fns';
 
-export const Story: React.FC<Props> = ({ story, index, total, onNext, onPrev }) => {
+export const Story: React.FC<Props> = ({ story, index, total, loading, onNext, onPrev }) => {
   const setStoryView = useSetStoryView();
-  const { user } = story;
-  const date = formatDistanceToNow(new Date(story.createdAt), {
-    addSuffix: true,
-  })
 
   const onBack = useCallback(() => {
     setStoryView(-1);
   }, [setStoryView]);
 
   const onLink = useCallback(() => {
-    window.open(story.link, '__blank')
-  }, [story.link]);
+    if (story) {
+      window.open(story.link, '__blank')
+    }
+  }, [story]);
+
+  if (!story || loading) {
+    return (
+      <Box
+        width="100%"
+        height="100%"
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+        justifyContent="center"
+        position="absolute"
+        top={0}
+        left={0}
+        sx={{
+          backgroundColor: palette.grayDark
+        }}
+      >
+        <CircularProgress size={20} />
+      </Box>      
+    )
+  }
+
+  const { user } = story;
+  const date = formatDistanceToNow(new Date(story.createdAt), {
+    addSuffix: true,
+  })
   
   return (
     <Box
@@ -150,9 +176,10 @@ const styles: Record<TypographyNames, object>= {
 }
 
 type Props = {
-  story: FetchPublicStories['storiesList']['items'][0],
+  story: FetchPublicStories['storiesList']['items'][0] | undefined,
   total: number,
   index: number,
+  loading: boolean,
   onNext: () => void,
   onPrev: () => void,
 }
