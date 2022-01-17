@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState, useContext } from 'react';
 import { fetchPublicStories } from './story-actions';
 import { FetchPublicStories } from '@shared/graphql-types';
+import { ApolloError } from '@apollo/client';
 
 const initialState = {
   items: [],
@@ -87,7 +88,7 @@ export type State = {
   items: FetchPublicStories['storiesList']['items'],
   count: number,
   loading: boolean,
-  error: Error | null,
+  error: ApolloError | null,
   next: () => void,
   refresh: () => void
 }

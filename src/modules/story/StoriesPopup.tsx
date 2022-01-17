@@ -56,9 +56,9 @@ ReactDOM.render(
     <Stories>
       <StoryView>
         <StoriesPopup />
-        <CssBaseline />
       </StoryView>
     </Stories>
+    <CssBaseline />
   </ThemeProvider>,
   document.getElementById('root'),
 )

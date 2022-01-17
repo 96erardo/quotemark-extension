@@ -126,6 +126,9 @@
     "message": "The story couldn't be created, please try again",
     "description": "Error message when creating a story"
   },
+  "story_auth_error": {
+    "message": "You are not logged in"
+  },
   "about_us_1": {
     "message": "Hello, my name is Gerardo García and i’m a software developer. I had the idea of QuoteMark a while ago because i sometimes forget about important details i read on the Internet, that situation sometimes led to silly mistakes and inefficient solutions that made me lose time.",
     "description": "First paragraph from about-us page"

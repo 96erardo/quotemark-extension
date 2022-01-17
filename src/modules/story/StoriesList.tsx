@@ -2,11 +2,13 @@ import React, { useMemo, useCallback } from 'react';
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import CircularProgress from '@mui/material/CircularProgress';
+import { StoriesErrorPlaceholder } from './StoriesErrorPlaceholder';
 import { StoryListItem } from './StoryListItem';
 import { useStories } from './StoriesContext';
+import { ErrorCodes } from '@shared/types';
 
 export const StoriesList: React.FC = () => {
-  const { items, count, loading, error, next } = useStories();
+  const { items, count, loading, error, next, refresh } = useStories();
   let content = null;
   let justify = 'flex-start';
 
@@ -41,6 +43,29 @@ export const StoriesList: React.FC = () => {
         </Box>
       </>
     )
+  }
+
+  if (error && !loading) {
+    justify = 'center';
+
+    if (error.graphQLErrors.length) {
+      const [{ extensions }] = error.graphQLErrors;
+      const { code } = extensions;
+
+      content = (
+        <StoriesErrorPlaceholder 
+          code={code as ErrorCodes}
+          onRefresh={refresh}
+        />
+      );
+    } else if (error.networkError) {
+      content = (
+        <StoriesErrorPlaceholder 
+          code={ErrorCodes.ServerException}
+          onRefresh={refresh}
+        />
+      )
+    }
   }
 
   return (
