@@ -7,7 +7,7 @@
         "48": "assets/icon48.png",
         "128": "assets/icon128.png"
     },
-    "version": "1.0.3",
+    "version": "1.0.4",
     "manifest_version": 3,
     "default_locale": "en",
     "permissions": [
@@ -15,7 +15,9 @@
         "contextMenus",
         "notifications"
     ],
-    "action": {},
+    "action": {
+        "default_popup": "dist/popup.html"
+    },
     "options_page": "dist/options.html",
     "background": {
         "service_worker": "dist/background.js"

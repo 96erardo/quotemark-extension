@@ -9,3 +9,8 @@ export * from './PayPalIcon';
 export * from './TwitterIcon';
 export * from './YouTubeIcon';
 export * from './MoreIcon';
+export * from './SandClockIcon';
+export * from './TrashIcon';
+export * from './EyeIcon';
+export * from './LinkIcon';
+export * from './HouseIcon';

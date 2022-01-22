@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import Link from '@mui/material/Link';
@@ -8,12 +8,20 @@ import Menu from '@mui/material/Menu';
 import { MenuItem } from '@shared/components/MenuItem';
 import { MoreIcon } from '@shared/components/icons';
 import { updateQuoteName } from './quote-actions';
-import { format } from 'date-fns';
-import { useState } from 'react';
 import { UpdateQuote } from '@shared/graphql-types';
 import { useSnackbar } from 'notistack';
+import { format } from 'date-fns';
 
-export const QuoteItemTitle: React.FC<Props> = ({ id, title, date, link, collapsed, onUpdate, onDelete }) => {
+export const QuoteItemTitle: React.FC<Props> = ({ 
+  id, 
+  title, 
+  date, 
+  link, 
+  collapsed, 
+  onUpdate, 
+  onDelete,
+  onStory,
+}) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [updating, setUpdating] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
@@ -93,6 +101,9 @@ export const QuoteItemTitle: React.FC<Props> = ({ id, title, date, link, collaps
         anchorEl={anchorEl}
         onClose={() => setAnchorEl(null)}
       >
+        <MenuItem onClick={onStory}>
+          {chrome.i18n.getMessage('add_to_stories')}
+        </MenuItem>
         <MenuItem variant="danger" onClick={() => onDelete(id, title)}>
           {chrome.i18n.getMessage('delete')}
         </MenuItem>
@@ -122,4 +133,5 @@ type Props = {
   collapsed: boolean,
   onUpdate: (quote: UpdateQuote['quoteUpdate']) => void,
   onDelete: (id: string, title: string) => void,
+  onStory: () => void,
 }

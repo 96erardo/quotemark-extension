@@ -12,7 +12,8 @@ import Container from '@mui/material/Container';
 import { client } from '@shared/config/apollo';
 import { ApolloProvider } from '@apollo/client';
 import { useSnackbarStyle } from '@shared/config/snackbar';
-import theme from '@shared/config/theme';
+import { DialogHandler } from 'react-dialog-handler';
+import theme from '@shared/config/theme-options';
 
 function Options () {
   const [user, setUser] = useState<FetchUser['user'] | null>(null);
@@ -50,10 +51,12 @@ function Options () {
 
 ReactDOM.render(
   <ApolloProvider client={client}>
-    <ThemeProvider theme={theme}>
-      <Options />
-      <CssBaseline />
-    </ThemeProvider>
+    <DialogHandler>
+      <ThemeProvider theme={theme}>
+        <Options />
+        <CssBaseline />
+      </ThemeProvider>
+    </DialogHandler>
   </ApolloProvider>
   , document.getElementById('root')
 );

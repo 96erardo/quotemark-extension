@@ -1,5 +1,5 @@
 import { makeStyles } from '@mui/styles';
-import { palette } from './theme';
+import { palette } from './theme-options';
 
 export const useSnackbarStyle = makeStyles({
   error: {
