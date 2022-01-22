@@ -103,6 +103,9 @@
     "message": "Hubo un error, no se pudo cambiar el título del quote",
     "description": "Mensaje de error mientras se edita el título del quote"
   },
+  "story_popup_title": {
+    "message": "Historias"
+  },
   "story_menu_title": {
     "message": "Mis Historias",
     "description": "Opción de menú lateral para acceder a las historias"
@@ -122,6 +125,9 @@
   "story_create_error": {
     "message": "No se pudo crear la historia, intentalo nuevamente",
     "description": "Error message when creating a story"
+  },
+  "story_auth_error": {
+    "message": "No has iniciado sesión"
   },
   "about_us_1": {
     "message": "Hola, mi nombre es Gerardo García y soy desarrollador de software. La idea de QuoteMark nació hace un tiempo cuando me di cuenta que al leer cosas por Internet, muchas veces olvidaba pequeños detalles importantes de eso que había leído, dicha situación hacía que cometiera pequeños errores o no me permitía implementar la mejor solución posible a un problema.",

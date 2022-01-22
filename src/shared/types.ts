@@ -21,3 +21,4 @@ export type TypographyNames =
   'Arial' |
   'Poppins' |
   'Barlow';
+

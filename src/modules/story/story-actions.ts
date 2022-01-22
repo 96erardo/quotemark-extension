@@ -4,12 +4,15 @@ import { Result } from '@shared/types';
 import {
   CREATE_STORY,
   FETCH_MY_STORIES,
+  FETCH_PUBLIC_STORIES,
 } from './story-queries';
 import {
   CreateStory,
   CreateStoryVariables,
   FetchMyStories,
   FetchMyStoriesVariables,
+  FetchPublicStories,
+  FetchPublicStoriesVariables,
   Typography,
 } from '@shared/graphql-types';
 
@@ -91,4 +94,38 @@ export async function fetchMyStories (
   const { data: { myStoriesList } } = response;
 
   return [myStoriesList, null];
+}
+
+/**
+ * Fetches the list of available stories from all users
+ * 
+ * @param page - The number of page to fetch 
+ * 
+ * @returns The list of stories
+ */
+export async function fetchPublicStories (
+  page: number = 1,
+): Result<FetchPublicStories['storiesList'], ApolloError> {
+  const first = 8;
+  const skip = first * (page - 1);
+  let response = null;
+
+  try {
+    response = await client.query<FetchPublicStories, FetchPublicStoriesVariables>({
+      query: FETCH_PUBLIC_STORIES,
+      fetchPolicy: 'network-only',
+      variables: {
+        first,
+        skip
+      }
+    });
+
+  } catch (e) {
+
+    return [null, e as ApolloError];
+  }
+
+  const { data: { storiesList } } = response;
+
+  return [storiesList, null];
 }

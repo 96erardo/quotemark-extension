@@ -16,8 +16,10 @@ import BarlowMediumItalic from '@shared/assets/fonts/BarlowCondensed-MediumItali
 
 export const palette = {
   purpleDark: '#6A2871',
+  purpleDark_1: '#7F3C86',
   purple: '#95389E',
   purpleLight: '#BC45C8',
+  purpleLight_1: '#B000B9',
 
   grayDark: '#A1A1A1',
   gray: '#BEBEBE',
@@ -29,6 +31,7 @@ export const palette = {
   green: '#34BE82',
 
   dark: '#1F1D36',
+  darkHover: '#1F1D36',
   black: '#000',
   white: '#fff',
   whiteLight: 'rgba(255, 255, 255, .5)'
@@ -110,6 +113,10 @@ export default createTheme({
       fontWeight: 600,
       letterSpacing: 0,
     },
+    caption: {
+      fontFamily: 'Poppins',
+      fontWeight: 400,
+    }
   },
   components: {
     MuiDialog: {
