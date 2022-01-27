@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -13,6 +13,17 @@ import theme, { palette } from '@shared/config/theme-popup';
 import '@shared/config/scrollbar.css';
 
 const StoriesPopup: React.FC = () => {
+  useEffect(() => {
+    chrome.action.setIcon({
+      path: {
+        16: '../assets/icon16.png',
+        32: '../assets/icon32.png',
+        48: '../assets/icon48.png',
+        128: '../assets/icon128.png',
+      }
+    })
+  }, []);
+
   return (
     <Box 
       width={350} 
