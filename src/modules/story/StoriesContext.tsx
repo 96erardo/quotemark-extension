@@ -37,6 +37,17 @@ export const Stories: React.FC = ({ children }) => {
     }
 
     if (data) {
+      if (page === 1) {
+        if (data.items.length > 0) {
+          const [story] = data.items;
+
+          chrome.storage.local.set({ last: story.createdAt });
+
+        } else {
+          chrome.storage.local.set({ last: '' });
+        }
+      }
+
       setState(prevState => ({
         ...prevState,
         count: data.count,
