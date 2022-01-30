@@ -4,7 +4,7 @@ import Avatar from '@mui/material/Avatar';
 import { FetchPublicStories } from '@shared/graphql-types';
 import { palette } from '@shared/config/theme-popup';
 
-export const StoryAvatar: React.FC<Props> = ({ user }) => {
+export const StoryAvatar: React.FC<Props> = ({ user, seen }) => {
   return (
     <Box 
       width={60} 
@@ -14,7 +14,11 @@ export const StoryAvatar: React.FC<Props> = ({ user }) => {
       alignItems="center"
       justifyContent="center"
       sx={{
-        background:  `linear-gradient(135deg, ${palette.purpleDark_1}, ${palette.purpleLight_1})`
+        background: seen ? (
+          'rgba(190, 190, 190, .35)'
+          ) : (
+          `linear-gradient(135deg, ${palette.purpleDark_1}, ${palette.purpleLight_1})`
+        )
       }}
     >
       <Avatar 
@@ -31,5 +35,6 @@ export const StoryAvatar: React.FC<Props> = ({ user }) => {
 }
 
 type Props = {
-  user: FetchPublicStories['storiesList']['items'][0]['user']
+  user: FetchPublicStories['storiesList']['items'][0]['user'],
+  seen: boolean,
 }

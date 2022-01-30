@@ -26,11 +26,14 @@ export const StoryListItem: React.FC<Props> = ({ story, index }) => {
       sx={{
         cursor: 'pointer',
         '&:hover': {
-          backgroundColor: 'rgb(46, 43, 80)'
+          backgroundColor: story.seen ? 'rgba(190, 190, 190, .35)' : 'rgb(46, 43, 80)',
         }
       }}
     >
-      <StoryAvatar user={story.user} />
+      <StoryAvatar 
+        user={story.user} 
+        seen={story.seen} 
+      />
       <Box 
         display="flex"
         flexDirection="column" 

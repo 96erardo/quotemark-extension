@@ -12,12 +12,13 @@ const initialState = {
 
 const StoryListContext = React.createContext<State>({
   ...initialState,
+  seen: (id) => {},
   next: () => {},
   refresh: () => {},
 });
 
 export const Stories: React.FC = ({ children }) => {
-  const [state, setState] = useState<Omit<State, 'next' | 'refresh'>>(initialState);
+  const [state, setState] = useState<Omit<State,'seen' | 'next' | 'refresh'>>(initialState);
   const [page, setPage] = useState(1);
 
   const fetch = useCallback(async () => {
@@ -58,6 +59,22 @@ export const Stories: React.FC = ({ children }) => {
     }
   }, [page]);
 
+  const seen = useCallback((id: string) => {
+    setState(prevState => ({
+      ...prevState,
+      items: prevState.items.map(story => {
+        if (story.id === id) {
+          return {
+            ...story,
+            seen: true
+          }
+        }
+
+        return story;
+      })
+    }))
+  }, []);
+
   const next = useCallback(() => {
     if (state.count > state.items.length) {
       setPage(prevPage => prevPage + 1);
@@ -83,6 +100,7 @@ export const Stories: React.FC = ({ children }) => {
       count: state.count,
       loading: state.loading,
       error: state.error,
+      seen,
       next,
       refresh
     }}>
@@ -100,6 +118,7 @@ export type State = {
   count: number,
   loading: boolean,
   error: ApolloError | null,
+  seen: (id: string) => void,
   next: () => void,
   refresh: () => void
 }
