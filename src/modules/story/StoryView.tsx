@@ -9,8 +9,10 @@ const StoryViewContext = React.createContext<Dispatch<SetStateAction<number>>>(
 
 export const StoryView: React.FC = ({ children }) => {
   const [index, setIndex] = useState<number>(-1);
-  const { items, loading, count, next } = useStories();
+  const { items, loading, count, next, seen } = useStories();
   let content = null;
+
+  console.log('items', items);
 
   const onNext = useCallback(() => {
     setIndex(prevIndex => {
@@ -40,6 +42,7 @@ export const StoryView: React.FC = ({ children }) => {
         story={story}
         index={index}
         total={count - 1}
+        onSeen={seen}
         onNext={onNext}
         onPrev={onPrev}
       />

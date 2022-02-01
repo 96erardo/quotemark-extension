@@ -5,6 +5,7 @@ import {
   CREATE_STORY,
   FETCH_MY_STORIES,
   FETCH_PUBLIC_STORIES,
+  MARK_STORY_AS_SEEN,
 } from './story-queries';
 import {
   CreateStory,
@@ -13,6 +14,8 @@ import {
   FetchMyStoriesVariables,
   FetchPublicStories,
   FetchPublicStoriesVariables,
+  MarkStoryAsSeen,
+  MarkStoryAsSeenVariables,
   Typography,
 } from '@shared/graphql-types';
 
@@ -128,4 +131,40 @@ export async function fetchPublicStories (
   const { data: { storiesList } } = response;
 
   return [storiesList, null];
+}
+
+/**
+ * Marks the specified story as seen
+ * 
+ * @param id - The id of the story
+ * 
+ * @returns The updated story
+ */
+export async function markAsSeen (id: string): Result<MarkStoryAsSeen['markAsSeen'], ApolloError> {
+  let response = null;
+
+  try {
+    response = await client.mutate<MarkStoryAsSeen, MarkStoryAsSeenVariables>({
+      mutation: MARK_STORY_AS_SEEN,
+      variables: {
+        id
+      }
+    });
+
+  } catch (e) {
+    return [null, e as ApolloError];
+  }
+
+  const { data } = response;
+
+  if (data?.markAsSeen) {
+
+    return [data.markAsSeen, null];
+  }
+
+  return [null, new ApolloError({
+    clientErrors: [
+      new Error('Something happened')
+    ]
+  })]
 }

@@ -42,6 +42,7 @@ export const FETCH_PUBLIC_STORIES = gql`
         typography
         content
         link
+        seen
         user {
           id
           firstName
@@ -50,6 +51,20 @@ export const FETCH_PUBLIC_STORIES = gql`
         }
         createdAt
       }
+    }
+  }
+`
+
+export const MARK_STORY_AS_SEEN = gql`
+  mutation MarkStoryAsSeen ($id: ID) {
+    markAsSeen (
+      story: {
+        connect: {
+          id: $id
+        }
+      }
+    ) {
+      id
     }
   }
 `

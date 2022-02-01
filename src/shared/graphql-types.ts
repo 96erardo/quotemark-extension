@@ -30,13 +30,13 @@ export type DatePredicate = {
 
 export type DateTimePredicate = {
   equals?: Maybe<Scalars['DateTime']>;
-  gt?: Maybe<Scalars['Date']>;
-  gte?: Maybe<Scalars['Date']>;
+  gt?: Maybe<Scalars['DateTime']>;
+  gte?: Maybe<Scalars['DateTime']>;
   in?: Maybe<Array<Scalars['DateTime']>>;
   is_empty?: Maybe<Scalars['Boolean']>;
   is_not_empty?: Maybe<Scalars['Boolean']>;
-  lt?: Maybe<Scalars['Date']>;
-  lte?: Maybe<Scalars['Date']>;
+  lt?: Maybe<Scalars['DateTime']>;
+  lte?: Maybe<Scalars['DateTime']>;
   not_equals?: Maybe<Scalars['DateTime']>;
   not_in?: Maybe<Array<Scalars['DateTime']>>;
 };
@@ -61,6 +61,7 @@ export type IdPredicate = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  markAsSeen: Story;
   quoteCreate?: Maybe<Quote>;
   quoteDelete: DeleteResult;
   quoteUpdate?: Maybe<Quote>;
@@ -72,6 +73,11 @@ export type Mutation = {
   userSetRole?: Maybe<User>;
   userUnban?: Maybe<User>;
   userUpdate?: Maybe<User>;
+};
+
+
+export type MutationMarkAsSeenArgs = {
+  story: StoryViewRelationInput;
 };
 
 
@@ -295,6 +301,7 @@ export type Story = {
   deletedAt?: Maybe<Scalars['DateTime']>;
   id: Scalars['ID'];
   link: Scalars['String'];
+  seen: Scalars['Boolean'];
   typography: Typography;
   updatedAt: Scalars['DateTime'];
   user: User;
@@ -304,6 +311,7 @@ export type StoryFilter = {
   AND?: Maybe<Array<StoryFilter>>;
   OR?: Maybe<Array<StoryFilter>>;
   content?: Maybe<StringPredicate>;
+  createdAt?: Maybe<DateTimePredicate>;
   id?: Maybe<IdPredicate>;
   link?: Maybe<StringPredicate>;
   name?: Maybe<StringPredicate>;
@@ -321,6 +329,10 @@ export type StoryListResponse = {
 
 export type StoryQuoteRelationInput = {
   connect?: Maybe<QuoteKeyFilter>;
+};
+
+export type StoryViewRelationInput = {
+  connect?: Maybe<StoryKeyFilter>;
 };
 
 export type StringPredicate = {
@@ -432,7 +444,14 @@ export type FetchPublicStoriesVariables = Exact<{
 }>;
 
 
-export type FetchPublicStories = { __typename?: 'Query', storiesList: { __typename?: 'StoryListResponse', count: number, items: Array<{ __typename?: 'Story', id: string, color: string, typography: Typography, content: string, link: string, createdAt: any, user: { __typename?: 'User', id: string, firstName: string, lastName: string, avatar: string } }> } };
+export type FetchPublicStories = { __typename?: 'Query', storiesList: { __typename?: 'StoryListResponse', count: number, items: Array<{ __typename?: 'Story', id: string, color: string, typography: Typography, content: string, link: string, seen: boolean, createdAt: any, user: { __typename?: 'User', id: string, firstName: string, lastName: string, avatar: string } }> } };
+
+export type MarkStoryAsSeenVariables = Exact<{
+  id?: Maybe<Scalars['ID']>;
+}>;
+
+
+export type MarkStoryAsSeen = { __typename?: 'Mutation', markAsSeen: { __typename?: 'Story', id: string } };
 
 export type FetchUserVariables = Exact<{ [key: string]: never; }>;
 
