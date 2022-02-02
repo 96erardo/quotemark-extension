@@ -67,4 +67,18 @@ export const MARK_STORY_AS_SEEN = gql`
       id
     }
   }
-`
+`;
+
+export const FETCH_STORY_VIEWS = gql`
+  query FetchStoryViews ($id: ID!, $first: Int, $skip: Int) {
+    viewsList (id: $id, first: $first, skip: $skip) {
+      count
+      items {
+        id
+        firstName
+        lastName
+        avatar
+      }
+    }
+  }
+`;

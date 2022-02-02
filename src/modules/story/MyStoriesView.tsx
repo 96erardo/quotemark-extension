@@ -5,6 +5,7 @@ import Link from '@mui/material/Link';
 import CircularProgress from '@mui/material/CircularProgress';
 import { StoryCard } from './StoryCard';
 import { useMyStories } from './hooks/useMyStories';
+import { StorySeenDialog } from './StorySeenDialog';
 
 export const MyStoriesView: React.FC = () => {
   const { items, count, loading, next } = useMyStories();
@@ -80,6 +81,7 @@ export const MyStoriesView: React.FC = () => {
       </Grid>
       {load}
       {more}
+      <StorySeenDialog />
     </Box>
   );
 }
