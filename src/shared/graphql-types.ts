@@ -163,6 +163,7 @@ export type Query = {
   storiesList: StoryListResponse;
   user: User;
   usersList: UserListResponse;
+  viewsList: StoryViewsResponse;
 };
 
 
@@ -197,6 +198,13 @@ export type QueryStoriesListArgs = {
 export type QueryUsersListArgs = {
   filter?: Maybe<UserFilter>;
   first?: Maybe<Scalars['Int']>;
+  skip?: Maybe<Scalars['Int']>;
+};
+
+
+export type QueryViewsListArgs = {
+  first?: Maybe<Scalars['Int']>;
+  id: Scalars['ID'];
   skip?: Maybe<Scalars['Int']>;
 };
 
@@ -335,6 +343,12 @@ export type StoryViewRelationInput = {
   connect?: Maybe<StoryKeyFilter>;
 };
 
+export type StoryViewsResponse = {
+  __typename?: 'StoryViewsResponse';
+  count: Scalars['Int'];
+  items: Array<User>;
+};
+
 export type StringPredicate = {
   contains?: Maybe<Scalars['String']>;
   ends_with?: Maybe<Scalars['String']>;
@@ -452,6 +466,15 @@ export type MarkStoryAsSeenVariables = Exact<{
 
 
 export type MarkStoryAsSeen = { __typename?: 'Mutation', markAsSeen: { __typename?: 'Story', id: string } };
+
+export type FetchStoryViewsVariables = Exact<{
+  id: Scalars['ID'];
+  first?: Maybe<Scalars['Int']>;
+  skip?: Maybe<Scalars['Int']>;
+}>;
+
+
+export type FetchStoryViews = { __typename?: 'Query', viewsList: { __typename?: 'StoryViewsResponse', count: number, items: Array<{ __typename?: 'User', id: string, firstName: string, lastName: string, avatar: string }> } };
 
 export type FetchUserVariables = Exact<{ [key: string]: never; }>;
 

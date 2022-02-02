@@ -6,6 +6,7 @@ import {
   FETCH_MY_STORIES,
   FETCH_PUBLIC_STORIES,
   MARK_STORY_AS_SEEN,
+  FETCH_STORY_VIEWS,
 } from './story-queries';
 import {
   CreateStory,
@@ -16,6 +17,8 @@ import {
   FetchPublicStoriesVariables,
   MarkStoryAsSeen,
   MarkStoryAsSeenVariables,
+  FetchStoryViews,
+  FetchStoryViewsVariables,
   Typography,
 } from '@shared/graphql-types';
 
@@ -167,4 +170,39 @@ export async function markAsSeen (id: string): Result<MarkStoryAsSeen['markAsSee
       new Error('Something happened')
     ]
   })]
+}
+
+/**
+ * 
+ * @param id - The id of the story to fetch views from
+ * @param page - The page number of results
+ *  
+ * @returns The list of users that have already seen the story
+ */
+export async function fetchStoryViews (
+  id: string, 
+  page: number
+): Result<FetchStoryViews['viewsList'], ApolloError> {
+  let response = null;
+  const first = 12;
+  const skip = first * (page - 1);
+
+  try {
+    response = await client.query<FetchStoryViews, FetchStoryViewsVariables>({
+      query: FETCH_STORY_VIEWS,
+      fetchPolicy: 'network-only',
+      variables: {
+        id,
+        first,
+        skip,
+      }
+    })
+    
+  } catch (e) {
+    return [null, e as ApolloError];
+  }
+
+  const { data: { viewsList } } = response;
+
+  return [viewsList, null];
 }

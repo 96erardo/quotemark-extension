@@ -6,6 +6,8 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import { FetchMyStories, Typography as TypographyNames } from '@shared/graphql-types';
 import { formatDistanceToNowStrict } from 'date-fns';
+import { useDialogOpener } from 'react-dialog-handler';
+import { modalId, Params } from './StorySeenDialog';
 import {
   TrashIcon,
   EyeIcon,
@@ -13,7 +15,9 @@ import {
 } from '@shared/components/icons';
 
 export const StoryCard: React.FC<Props> = ({ story }) => {
+  const openDialog = useDialogOpener();
   const handleLinkClick = () => window.open(story.link, '_blank')
+  const handleEyeClick = () => openDialog<Params>(modalId, { id: story.id });
 
   const date = formatDistanceToNowStrict(new Date(story.createdAt))
     .replace(/ seconds?/, 's')
@@ -73,7 +77,7 @@ export const StoryCard: React.FC<Props> = ({ story }) => {
         <IconButton size="small" onClick={handleLinkClick}>
           <LinkIcon size={25} />
         </IconButton>
-        <IconButton size="small">      
+        <IconButton size="small" onClick={handleEyeClick}>      
           <EyeIcon size={25} />
         </IconButton>
         <IconButton size="small">
