@@ -1,7 +1,6 @@
 import React, { useState, useCallback, useMemo, useEffect, useRef, FormEvent } from 'react';
 import { Placeholder } from '@shared/components/Placeholder';
 import { QuoteItem } from './QuoteItem';
-import { QuoteDeleteModal, QuoteDeleteModalProps } from './QuoteDeleteModal';
 import { DeleteManyModal, DeleteManyModalProps } from './DeleteManyModal';
 import { useQuotes } from './hooks/useQuotes';
 import { useUser } from '@modules/user/hooks/useUser';
@@ -9,13 +8,13 @@ import { useSnackbar } from 'notistack';
 import { QuotesListHeader } from './QuotesListHeader';
 import CircularProgress from '@mui/material/CircularProgress';
 import { CreateStoryDialog } from '@modules/story/CreateStoryDialog';
+import { useDialogOpener } from 'react-dialog-handler';
 import Link from '@mui/material/Link';
 import Box from '@mui/material/Box';
 
 export const QuotesView: React.FC = () => {
   const user = useUser();
   const { items, count, loading, refresh, next, update, filter, error } = useQuotes(user !== null);
-  const [modal, setModal] = useState<Omit<QuoteDeleteModalProps, 'onClose' | 'onDeleted'>>({ open: false });
   const [delMany, setDelMany] = useState<Omit<DeleteManyModalProps, 'onClose' | 'onDeleted'>>({ open: false, ids: [] });
   const { enqueueSnackbar } = useSnackbar();
   const ref = useRef<HTMLFormElement>(null);
@@ -42,14 +41,6 @@ export const QuotesView: React.FC = () => {
 
     next();
   }, [next]);
-
-  const onDelete = useCallback((id: string, title: string) => {
-    setModal({
-      open: true,
-      id,
-      title
-    })
-  }, []);
 
   const onDeleteMany = useCallback((e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -81,10 +72,10 @@ export const QuotesView: React.FC = () => {
         key={item.id}
         quote={item}
         onUpdate={update}
-        onDelete={onDelete}
+        onRefresh={refresh}
       />
     ))
-  ), [items, onDelete, update]);
+  ), [items, refresh, update]);
 
   if (items.length === 0 && !loading) {  
     content = (
@@ -134,11 +125,6 @@ export const QuotesView: React.FC = () => {
             />
           </Box>
         )}
-        <QuoteDeleteModal 
-          {...modal} 
-          onDeleted={refresh}
-          onClose={() => setModal({ open: false })}
-        />
         <CreateStoryDialog />
       </Box>
     );

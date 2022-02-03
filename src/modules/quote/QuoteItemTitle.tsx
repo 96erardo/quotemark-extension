@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import Link from '@mui/material/Link';
@@ -10,6 +10,9 @@ import { MoreIcon } from '@shared/components/icons';
 import { updateQuoteName } from './quote-actions';
 import { UpdateQuote } from '@shared/graphql-types';
 import { useSnackbar } from 'notistack';
+import { useDialogOpener, useDialogCloser } from 'react-dialog-handler';
+import { modalId, Params } from '@shared/components/DecisionDialog';
+import { deleteQuote } from './quote-actions';
 import { format } from 'date-fns';
 
 export const QuoteItemTitle: React.FC<Props> = ({ 
@@ -19,11 +22,13 @@ export const QuoteItemTitle: React.FC<Props> = ({
   link, 
   collapsed, 
   onUpdate, 
-  onDelete,
+  onRefresh,
   onStory,
 }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [updating, setUpdating] = useState(false);
+  const openDialog = useDialogOpener();
+  const closeDialog = useDialogCloser();
   const { enqueueSnackbar } = useSnackbar();
   const open = Boolean(anchorEl);
   const titleRef = useRef<HTMLHeadingElement>(null);
@@ -62,6 +67,35 @@ export const QuoteItemTitle: React.FC<Props> = ({
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   }
+
+  const handleDelete = useCallback(() => {
+    openDialog<Params>(modalId, {
+      title: chrome.i18n.getMessage('delete_title'),
+      text: `${chrome.i18n.getMessage('delete_warning_1')} "${title}" ${chrome.i18n.getMessage('delete_warning_2')}`,
+      yesText: chrome.i18n.getMessage('yes_delete'),
+      noText: chrome.i18n.getMessage('cancel'),
+      onYes: async () => {
+        const [, err] = await deleteQuote(id);
+
+        if (err) {
+          enqueueSnackbar(
+            chrome.i18n.getMessage('delete_error'),
+            { variant: 'error' }
+          )
+        } else {
+          enqueueSnackbar(
+            chrome.i18n.getMessage('delete_success'),
+            { variant: 'success' }
+          )
+
+          onRefresh();
+        }
+
+        closeDialog(modalId);
+      },
+      onNo: () => closeDialog(modalId)
+    })
+  }, [id, title, openDialog, closeDialog, onRefresh]);
 
   const label = format(new Date(date), 'MMM d, yyyy');
 
@@ -104,7 +138,7 @@ export const QuoteItemTitle: React.FC<Props> = ({
         <MenuItem onClick={onStory}>
           {chrome.i18n.getMessage('add_to_stories')}
         </MenuItem>
-        <MenuItem variant="danger" onClick={() => onDelete(id, title)}>
+        <MenuItem variant="danger" onClick={handleDelete}>
           {chrome.i18n.getMessage('delete')}
         </MenuItem>
       </Menu>
@@ -132,6 +166,6 @@ type Props = {
   date: string,
   collapsed: boolean,
   onUpdate: (quote: UpdateQuote['quoteUpdate']) => void,
-  onDelete: (id: string, title: string) => void,
+  onRefresh: () => void,
   onStory: () => void,
 }

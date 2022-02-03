@@ -13,6 +13,7 @@ import { client } from '@shared/config/apollo';
 import { ApolloProvider } from '@apollo/client';
 import { useSnackbarStyle } from '@shared/config/snackbar';
 import { DialogHandler } from 'react-dialog-handler';
+import { DecisionDialog } from '@shared/components/DecisionDialog';
 import theme from '@shared/config/theme-options';
 
 function Options () {
@@ -43,6 +44,7 @@ function Options () {
             <MainCard />
           </Container>
           <Onboarding />
+          <DecisionDialog />
         </Box>
       </UserContext.Provider>
     </SnackbarProvider>

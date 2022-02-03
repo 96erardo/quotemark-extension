@@ -129,6 +129,18 @@
   "story_auth_error": {
     "message": "No has iniciado sesión"
   },
+  "story_delete_title": {
+    "message": "Eliminar story"
+  },
+  "story_delete_text": {
+    "message": "Estás seguro de querer eliminar esta historia?"
+  },
+  "story_delete_error": {
+    "message": "Hubo un error, no se pudo borrar el story"
+  },
+  "story_delete_success": {
+    "message": "Story eliminada correctamente"
+  },
   "about_us_1": {
     "message": "Hola, mi nombre es Gerardo García y soy desarrollador de software. La idea de QuoteMark nació hace un tiempo cuando me di cuenta que al leer cosas por Internet, muchas veces olvidaba pequeños detalles importantes de eso que había leído, dicha situación hacía que cometiera pequeños errores o no me permitía implementar la mejor solución posible a un problema.",
     "description": "Primer parrafo de la página about-us"
