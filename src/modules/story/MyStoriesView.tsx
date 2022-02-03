@@ -8,19 +8,23 @@ import { useMyStories } from './hooks/useMyStories';
 import { StorySeenDialog } from './StorySeenDialog';
 
 export const MyStoriesView: React.FC = () => {
-  const { items, count, loading, next } = useMyStories();
+  const { items, count, loading, next, refresh } = useMyStories();
 
   const stories = useMemo(() => {
     return items.reduce<Array<Array<JSX.Element>>>((acum, item, i) => {
       const col = i % 4;
       
       acum[col].push(
-        <StoryCard key={item.id} story={item} />
+        <StoryCard 
+          key={item.id} 
+          story={item} 
+          onRefresh={refresh}
+        />
       )
 
       return acum;
     }, [[], [], [], []]);
-  }, [items]);
+  }, [items, refresh]);
 
   const more = (!loading && items.length < count) ? (
     <Box 

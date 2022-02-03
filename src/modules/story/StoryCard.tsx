@@ -6,18 +6,56 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import { FetchMyStories, Typography as TypographyNames } from '@shared/graphql-types';
 import { formatDistanceToNowStrict } from 'date-fns';
-import { useDialogOpener } from 'react-dialog-handler';
+import { useDialogOpener, useDialogCloser } from 'react-dialog-handler';
+import { deleteStory } from './story-actions';
+import { useSnackbar } from 'notistack';
+import { 
+  modalId as decisionModalId,
+  Params as DecisionParams
+} from '@shared/components/DecisionDialog';
 import { modalId, Params } from './StorySeenDialog';
 import {
   TrashIcon,
   EyeIcon,
   LinkIcon
 } from '@shared/components/icons';
+import { useCallback } from 'react';
 
-export const StoryCard: React.FC<Props> = ({ story }) => {
+export const StoryCard: React.FC<Props> = ({ story, onRefresh }) => {
   const openDialog = useDialogOpener();
+  const closeDialog = useDialogCloser();
+  const { enqueueSnackbar } = useSnackbar();
   const handleLinkClick = () => window.open(story.link, '_blank')
   const handleEyeClick = () => openDialog<Params>(modalId, { id: story.id });
+
+  const handleDelete = useCallback(() => {
+    openDialog<DecisionParams>(decisionModalId, {
+      title: chrome.i18n.getMessage('story_delete_title'),
+      text: chrome.i18n.getMessage('story_delete_text'),
+      yesText: chrome.i18n.getMessage('yes_delete'),
+      noText: chrome.i18n.getMessage('cancel'),
+      onYes: async () => {
+        const [, err] = await deleteStory(story.id);
+
+        if (err) {
+          enqueueSnackbar(
+            chrome.i18n.getMessage('story_delete_error'),
+            { variant: 'error' }
+          )
+        } else {
+          enqueueSnackbar(
+            chrome.i18n.getMessage('story_delete_success'),
+            { variant: 'success' }
+          )
+
+          onRefresh();
+        }
+
+        closeDialog(decisionModalId);
+      },
+      onNo: () => closeDialog(decisionModalId)
+    })
+  }, [story, enqueueSnackbar, closeDialog, onRefresh]);
 
   const date = formatDistanceToNowStrict(new Date(story.createdAt))
     .replace(/ seconds?/, 's')
@@ -80,7 +118,7 @@ export const StoryCard: React.FC<Props> = ({ story }) => {
         <IconButton size="small" onClick={handleEyeClick}>      
           <EyeIcon size={25} />
         </IconButton>
-        <IconButton size="small">
+        <IconButton size="small" onClick={handleDelete}>
           <TrashIcon size={25} />
         </IconButton>
       </Stack>
@@ -103,4 +141,5 @@ const styles: Record<TypographyNames, object>= {
 
 type Props = {
   story: FetchMyStories['myStoriesList']['items'][0],
+  onRefresh: () => void,
 }

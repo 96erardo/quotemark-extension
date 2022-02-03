@@ -68,7 +68,7 @@ export type Mutation = {
   reportCreate?: Maybe<Report>;
   reportUpdate?: Maybe<Report>;
   storyCreate: Story;
-  storyDelete?: Maybe<DeleteResult>;
+  storyDelete: DeleteResult;
   userBan?: Maybe<User>;
   userSetRole?: Maybe<User>;
   userUnban?: Maybe<User>;
@@ -475,6 +475,13 @@ export type FetchStoryViewsVariables = Exact<{
 
 
 export type FetchStoryViews = { __typename?: 'Query', viewsList: { __typename?: 'StoryViewsResponse', count: number, items: Array<{ __typename?: 'User', id: string, firstName: string, lastName: string, avatar: string }> } };
+
+export type DeleteStoryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type DeleteStory = { __typename?: 'Mutation', storyDelete: { __typename?: 'DeleteResult', success: boolean, message?: string | null | undefined } };
 
 export type FetchUserVariables = Exact<{ [key: string]: never; }>;
 

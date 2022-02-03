@@ -82,3 +82,12 @@ export const FETCH_STORY_VIEWS = gql`
     }
   }
 `;
+
+export const DELETE_STORY = gql`
+  mutation DeleteStory ($id: ID!) {
+    storyDelete (id: $id) {
+      success
+      message
+    }
+  }
+`;

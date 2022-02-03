@@ -7,6 +7,7 @@ import {
   FETCH_PUBLIC_STORIES,
   MARK_STORY_AS_SEEN,
   FETCH_STORY_VIEWS,
+  DELETE_STORY,
 } from './story-queries';
 import {
   CreateStory,
@@ -19,6 +20,8 @@ import {
   MarkStoryAsSeenVariables,
   FetchStoryViews,
   FetchStoryViewsVariables,
+  DeleteStory,
+  DeleteStoryVariables,
   Typography,
 } from '@shared/graphql-types';
 
@@ -205,4 +208,43 @@ export async function fetchStoryViews (
   const { data: { viewsList } } = response;
 
   return [viewsList, null];
+}
+
+/**
+ * Deletes the specified story
+ * 
+ * @param id - The story id
+ * 
+ * @returns if the request succeeded or not
+ */
+export async function deleteStory (id: string): Result<boolean, ApolloError> {
+  let response = null;
+
+  try {
+    response = await client.mutate<DeleteStory, DeleteStoryVariables>({
+      mutation: DELETE_STORY,
+      variables: {
+        id
+      }
+    })
+
+  } catch (e) {
+
+    return [null, e as ApolloError];
+  }
+  
+  const { data } = response;
+
+  if (!data?.storyDelete || !data.storyDelete.success) {
+    const err = data?.storyDelete.message || 'Something hapened';
+
+    return [null, new ApolloError({
+      clientErrors: [
+        new Error(err)
+      ]
+    })]
+  }
+
+  return [true, null];
+
 }
