@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Avatar from '@mui/material/Avatar';
@@ -10,11 +10,29 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import LinkIcon from '@mui/icons-material/Link';
 import { palette } from '@shared/config/theme-popup';
 import { FetchPublicStories, Typography as TypographyNames } from '@shared/graphql-types';
+import { markAsSeen } from './story-actions';
 import { useSetStoryView } from './StoryView';
 import { formatDistanceToNow } from 'date-fns';
 
-export const Story: React.FC<Props> = ({ story, index, total, loading, onNext, onPrev }) => {
+export const Story: React.FC<Props> = ({ story, index, total, loading, onSeen, onNext, onPrev }) => {
   const setStoryView = useSetStoryView();
+
+  const markStoryAsSeen = useCallback(async () => {
+    if (!story.seen) {
+      onSeen(story.id);
+      
+      try {
+        await markAsSeen(story.id);
+
+      } catch (e) {
+        console.log('Somethig failed:', e);
+      }
+    }
+  }, [story, onSeen]);
+
+  useEffect(() => {
+    markStoryAsSeen();
+  }, [markStoryAsSeen])
 
   const onBack = useCallback(() => {
     setStoryView(-1);
@@ -176,10 +194,11 @@ const styles: Record<TypographyNames, object>= {
 }
 
 type Props = {
-  story: FetchPublicStories['storiesList']['items'][0] | undefined,
+  story: FetchPublicStories['storiesList']['items'][0],
   total: number,
   index: number,
   loading: boolean,
+  onSeen: (id: string) => void
   onNext: () => void,
   onPrev: () => void,
 }

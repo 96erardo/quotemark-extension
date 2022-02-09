@@ -42,6 +42,7 @@ export const FETCH_PUBLIC_STORIES = gql`
         typography
         content
         link
+        seen
         user {
           id
           firstName
@@ -53,3 +54,40 @@ export const FETCH_PUBLIC_STORIES = gql`
     }
   }
 `
+
+export const MARK_STORY_AS_SEEN = gql`
+  mutation MarkStoryAsSeen ($id: ID) {
+    markAsSeen (
+      story: {
+        connect: {
+          id: $id
+        }
+      }
+    ) {
+      id
+    }
+  }
+`;
+
+export const FETCH_STORY_VIEWS = gql`
+  query FetchStoryViews ($id: ID!, $first: Int, $skip: Int) {
+    viewsList (id: $id, first: $first, skip: $skip) {
+      count
+      items {
+        id
+        firstName
+        lastName
+        avatar
+      }
+    }
+  }
+`;
+
+export const DELETE_STORY = gql`
+  mutation DeleteStory ($id: ID!) {
+    storyDelete (id: $id) {
+      success
+      message
+    }
+  }
+`;

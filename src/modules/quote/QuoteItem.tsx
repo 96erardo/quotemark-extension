@@ -9,7 +9,7 @@ import { modalId, Params } from '@modules/story/CreateStoryDialog';
 import { useDialogOpener } from 'react-dialog-handler';
 import { useTheme } from '@mui/material/styles';
 
-export const QuoteItem: React.FC<Props> = ({ index, quote, onUpdate, onDelete }) => {
+export const QuoteItem: React.FC<Props> = ({ index, quote, onRefresh, onUpdate }) => {
   const [checked, setChecked] = useState(false);
   const [collapsed, setCollapsed] = useState(true);
   const openDialog = useDialogOpener();
@@ -58,7 +58,7 @@ export const QuoteItem: React.FC<Props> = ({ index, quote, onUpdate, onDelete })
           link={quote.link}
           collapsed={collapsed}
           onUpdate={onUpdate}
-          onDelete={onDelete}
+          onRefresh={onRefresh}
           onStory={handleNewStory}
         />
         <QuoteItemContent 
@@ -79,6 +79,6 @@ export const QuoteItem: React.FC<Props> = ({ index, quote, onUpdate, onDelete })
 type Props = {
   index: number,
   quote: FetchQuotes['quotesList']['items'][0],
-  onDelete: (id: string, title: string) => void,
+  onRefresh: () => void,
   onUpdate: (quote: UpdateQuote['quoteUpdate']) => void
 }

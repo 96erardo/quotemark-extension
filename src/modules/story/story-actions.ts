@@ -5,6 +5,9 @@ import {
   CREATE_STORY,
   FETCH_MY_STORIES,
   FETCH_PUBLIC_STORIES,
+  MARK_STORY_AS_SEEN,
+  FETCH_STORY_VIEWS,
+  DELETE_STORY,
 } from './story-queries';
 import {
   CreateStory,
@@ -13,6 +16,12 @@ import {
   FetchMyStoriesVariables,
   FetchPublicStories,
   FetchPublicStoriesVariables,
+  MarkStoryAsSeen,
+  MarkStoryAsSeenVariables,
+  FetchStoryViews,
+  FetchStoryViewsVariables,
+  DeleteStory,
+  DeleteStoryVariables,
   Typography,
 } from '@shared/graphql-types';
 
@@ -128,4 +137,114 @@ export async function fetchPublicStories (
   const { data: { storiesList } } = response;
 
   return [storiesList, null];
+}
+
+/**
+ * Marks the specified story as seen
+ * 
+ * @param id - The id of the story
+ * 
+ * @returns The updated story
+ */
+export async function markAsSeen (id: string): Result<MarkStoryAsSeen['markAsSeen'], ApolloError> {
+  let response = null;
+
+  try {
+    response = await client.mutate<MarkStoryAsSeen, MarkStoryAsSeenVariables>({
+      mutation: MARK_STORY_AS_SEEN,
+      variables: {
+        id
+      }
+    });
+
+  } catch (e) {
+    return [null, e as ApolloError];
+  }
+
+  const { data } = response;
+
+  if (data?.markAsSeen) {
+
+    return [data.markAsSeen, null];
+  }
+
+  return [null, new ApolloError({
+    clientErrors: [
+      new Error('Something happened')
+    ]
+  })]
+}
+
+/**
+ * 
+ * @param id - The id of the story to fetch views from
+ * @param page - The page number of results
+ *  
+ * @returns The list of users that have already seen the story
+ */
+export async function fetchStoryViews (
+  id: string, 
+  page: number
+): Result<FetchStoryViews['viewsList'], ApolloError> {
+  let response = null;
+  const first = 12;
+  const skip = first * (page - 1);
+
+  try {
+    response = await client.query<FetchStoryViews, FetchStoryViewsVariables>({
+      query: FETCH_STORY_VIEWS,
+      fetchPolicy: 'network-only',
+      variables: {
+        id,
+        first,
+        skip,
+      }
+    })
+    
+  } catch (e) {
+    return [null, e as ApolloError];
+  }
+
+  const { data: { viewsList } } = response;
+
+  return [viewsList, null];
+}
+
+/**
+ * Deletes the specified story
+ * 
+ * @param id - The story id
+ * 
+ * @returns if the request succeeded or not
+ */
+export async function deleteStory (id: string): Result<boolean, ApolloError> {
+  let response = null;
+
+  try {
+    response = await client.mutate<DeleteStory, DeleteStoryVariables>({
+      mutation: DELETE_STORY,
+      variables: {
+        id
+      }
+    })
+
+  } catch (e) {
+
+    return [null, e as ApolloError];
+  }
+  
+  const { data } = response;
+
+  if (!data?.storyDelete || !data.storyDelete.success) {
+    const err = data?.storyDelete.message || 'Something hapened';
+
+    return [null, new ApolloError({
+      clientErrors: [
+        new Error(err)
+      ]
+    })]
+  }
+
+  return [true, null];
+
 }
